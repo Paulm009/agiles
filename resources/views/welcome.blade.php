@@ -18,7 +18,7 @@
   
     <body>
     
-    <h1 class="title">LISTA DE HABITACIONES</h1>
+    <h1 class="title">LISTA DE MOTELES</h1>
 <br><br>
     <div class="container__slider">
 
@@ -33,10 +33,10 @@
 
                 </label>
                 <label class="card" for="item-2" id="selector-2">
-                <img src="{{ asset('HABI2.jpg') }}" alt="Descripción de la imagen">
+                <img src="{{ asset('dos.jpg') }}" alt="Descripción de la imagen">
                 </label>
                 <label class="card" for="item-3" id="selector-3">
-                <img src="{{ asset('HABI3.jpg') }}" alt="Descripción de la imagen">
+                <img src="{{ asset('tres.jpg') }}" alt="Descripción de la imagen">
                 </label>
 
             </div>
