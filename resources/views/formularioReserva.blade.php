@@ -65,8 +65,7 @@
                     <section class=" room-list text-center">
                         <div class="d-flex flex-column  flex-shrink-0 bg-white" ">
                             <div class="list-group list-group-flush border-bottom scrollarea">
-                              @foreach ($habitaciones as $habitacion)
-                              {{-- <a href="#" class="list-group-item list-group-item-action py-3 lh-sm" aria-current="true"> --}}
+                              {{-- @foreach ($habitaciones as $habitacion)
                                 <div class=" list-group-item card my-3 mx-2 shadow" >
                                     <div class="row g-0">
                                       <div class="col-md-5 d-flex align-items-center">
@@ -86,8 +85,64 @@
                                       </div>
                                     </div>
                                   </div>
-                              {{-- </a> --}}
-                              @endforeach
+                              @endforeach --}}
+                              <div class=" list-group-item card my-3 mx-2 shadow" >
+                                <div class="row g-0">
+                                  <div class="col-md-5 d-flex align-items-center">
+                                    <img src="{{URL::asset('storage/habitaciones/Hsimple.jpg' )}}" class="img-fluid rounded-start" alt="simple">
+                                  </div>
+                                  <div class="col-md-7">
+                                    <div class="card-body">
+                                      <h5 class="card-title">Habiacion simple </h5>
+                                      <h6 class="card-subtitle mb-2 text-muted">Mi Habit 1</h6>
+                                      <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore libero dolorem doloribus repellat illum, deleniti et commodi possimus blanditiis facilis? Nisi natus consectetur aperiam veritatis officia accusantium, praesentium placeat esse.</p>
+                                      <div class="row">
+
+                                        <p class="card-text"> <small class="text-muted">Precio: 600 Bs</small></p>
+                                        <a href="#" class="btn btn-warning">Reservar</a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class=" list-group-item card my-3 mx-2 shadow" >
+                                <div class="row g-0">
+                                  <div class="col-md-5 d-flex align-items-center">
+                                    <img src="{{URL::asset('storage/habitaciones/Hsimple.jpg' )}}" class="img-fluid rounded-start" alt="simple">
+                                  </div>
+                                  <div class="col-md-7">
+                                    <div class="card-body">
+                                      <h5 class="card-title">Habiacion doble </h5>
+                                      <h6 class="card-subtitle mb-2 text-muted">Mi Habit 1</h6>
+                                      <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore libero dolorem doloribus repellat illum, deleniti et commodi possimus blanditiis facilis? Nisi natus consectetur aperiam veritatis officia accusantium, praesentium placeat esse.</p>
+                                      <div class="row">
+
+                                        <p class="card-text"> <small class="text-muted">Precio: 600 Bs</small></p>
+                                        <a href="#" class="btn btn-warning">Reservar</a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class=" list-group-item card my-3 mx-2 shadow" >
+                                <div class="row g-0">
+                                  <div class="col-md-5 d-flex align-items-center">
+                                    <img src="{{URL::asset('storage/habitaciones/Hsimple.jpg' )}}" class="img-fluid rounded-start" alt="simple">
+                                  </div>
+                                  <div class="col-md-7">
+                                    <div class="card-body">
+                                      <h5 class="card-title">Habiacion triple </h5>
+                                      <h6 class="card-subtitle mb-2 text-muted">Mi Habit 1</h6>
+                                      <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore libero dolorem doloribus repellat illum, deleniti et commodi possimus blanditiis facilis? Nisi natus consectetur aperiam veritatis officia accusantium, praesentium placeat esse.</p>
+                                      <div class="row">
+
+                                        <p class="card-text"> <small class="text-muted">Precio: 600 Bs</small></p>
+                                        <a href="#" class="btn btn-warning">Reservar</a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                         </div>
                     </section>
