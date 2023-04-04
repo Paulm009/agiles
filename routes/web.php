@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservaHabitacionController;
-use App\Http\Controllers\registroHabitacion;
+use App\Http\Controllers\RegistroHabitacionController;
 
 /*
 |--------------------------------------------------------------------------

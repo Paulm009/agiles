@@ -9,6 +9,6 @@ class RegistroHabitacionController extends Controller
 {
     public function index(Request $request)
     {
-        return view('resgistroHabitacion');
+        return view('registroHabitacion');
     }
 }
