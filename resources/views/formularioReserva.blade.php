@@ -39,21 +39,19 @@
                         </div>
                         
                         <div class="col-md-6">
-                          <label for="cantidadDePersonas" class="form-label text-light">Cantidad de personas:</label>
+                          <label for="cantidadDePersonas" class="form-label text-light">Cantidad de huespedes:</label>
                           <input name="cantidadDePersonas" type="text" class="form-control" id="cantidadDePersonas" >
                       </div>
-                      <div class="col-md-6">
-                            <label  for="TipoDeHabitacion" class="form-label text-light">Tipo de Habitación:</label>
-                            <select name="TipoDeHabitacion" class="form-select" id="TipoDeHabitacion" >
-                                <option >Habitacion Simple</option>
-                                <option >Habitacion Doble</option>
-                                <option >Habitacion Triple</option>
-                            </select>
+                    </div>
+                    <div class="row d-flex justify-content-center mx-1">
+                      <div class="col-md-6 text-center pb-3">
+                        <a type="button" href="{{route('home')}}" class="btn w-100 btn-warning">Cancelar</a>
+                      </div>
+                      <div class="col-md-6 text-center pb-3">
+                          <button type="submit" class="btn w-100 btn-warning">Ver Disponibilidad</button>
                       </div>
                     </div>
-                    <div class="col-md-12 text-center pb-3">
-                        <button type="submit" class="btn btn-warning text-light">Ver Disponibilidad</button>
-                    </div>
+                    
                </form>
             </div>
             <div class="col-3"></div>

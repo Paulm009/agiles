@@ -17,7 +17,7 @@ use App\Http\Controllers\RegistroHabitacionController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 Route::get('/reserva', [ReservaHabitacionController::class,'index'])->name('reserva');
 Route::post('/reserva', [ReservaHabitacionController::class,'filtrar'])->name('reserva.seleccionarFecha');
 Route::get('/registro/habitacion', [RegistroHabitacionController::class,'index'])->name('registro.habitacion');
