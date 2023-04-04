@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 Route::get('/reserva', [ReservaHabitacionController::class,'index'])->name('reserva');
 Route::post('/reserva', [ReservaHabitacionController::class,'filtrar'])->name('reserva.seleccionarFecha');
+Route::get('/registro/habitacion', [ReservaHabitacionController::class,'index'])->name('registro.habitacion');

@@ -38,15 +38,10 @@
                             <input name="fechaSalida" type="date" class="form-control" id="fechaSalida" value="fechaSalida">
                         </div>
                         
-                        {{-- <div class="col-md-6">
-                            <label  for="habitacion" class="form-label text-light">Habitacion(s):</label>
-                            <select name="habitacion" class="form-select" id="habitacion" value={{ old('pais') }}>
-                                <option >Habitacion1</option>
-                                <option >Habitacion2</option>
-                                <option >Habitacion3</option>
-                                <option >Habitacion4</option>
-                            </select>
-                        </div> --}}
+                        <div class="col-md-6">
+                          <label for="numeroHabitacion" class="form-label text-light">Numero de habitaciones:</label>
+                          <input name="numeroHabitacion" type="date" class="form-control" id="numeroHabitacion" value="fechaSalida">
+                      </div>
                     </div>
                     <div class="col-md-12 text-center pb-3">
                         <button type="submit" class="btn btn-warning text-light">Ver Disponibilidad</button>
