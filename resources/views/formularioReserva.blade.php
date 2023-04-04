@@ -39,8 +39,16 @@
                         </div>
                         
                         <div class="col-md-6">
-                          <label for="numeroHabitacion" class="form-label text-light">Numero de habitaciones:</label>
-                          <input name="numeroHabitacion" type="date" class="form-control" id="numeroHabitacion" value="fechaSalida">
+                          <label for="cantidadDePersonas" class="form-label text-light">Cantidad de personas:</label>
+                          <input name="cantidadDePersonas" type="text" class="form-control" id="cantidadDePersonas" >
+                      </div>
+                      <div class="col-md-6">
+                            <label  for="TipoDeHabitacion" class="form-label text-light">Tipo de Habitación:</label>
+                            <select name="TipoDeHabitacion" class="form-select" id="TipoDeHabitacion" >
+                                <option >Habitacion Simple</option>
+                                <option >Habitacion Doble</option>
+                                <option >Habitacion Triple</option>
+                            </select>
                       </div>
                     </div>
                     <div class="col-md-12 text-center pb-3">
