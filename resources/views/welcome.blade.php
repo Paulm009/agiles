@@ -10,7 +10,7 @@
            <ul class="nav-links">
                 <li><a href="#">HOME</a></li>
                 <li><a href="{{url('/reserva')}}">RESERVAS</a></li>
-                <li><a href="#">LISTA DE HABITACIONES</a></li>
+                <li><a href="{{url('/listaHabitacion')}}">LISTA DE HABITACIONES</a></li>
            </ul>            
         </nav>
         
