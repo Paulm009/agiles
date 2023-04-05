@@ -19,7 +19,7 @@
 <body>
     <div class="pt-3 row">
         <section class="text-center row">
-                <h2 class="" >Reserva de habitaciones</h2>
+          <h2 class="" >Reserva de habitaciones</h2>
             
         </section>
         <section class="form-reserva mx-5 row">
@@ -31,17 +31,26 @@
                         <hr>
                         <div class="col-md-6">
                             <label for="fechaIngreso" class="form-label text-light">Fecha de ingreso:</label>
-                            <input id="fechaIngreso" name="fechaIngreso" type="date"  class="form-control" min="">
-                        </div>
+                            <input id="fechaIngreso" name="fechaIngreso" type="date"  class="form-control" min="" value="{{old('fechaIngreso')}}">
+                            @error('fechaIngreso')
+                                <p class="text-warning">{{ $message }}</p>
+                            @enderror
+                          </div>
                         <div class="col-md-6">
                             <label for="fechaSalida" class="form-label text-light">Fecha de salida:</label>
-                            <input name="fechaSalida" type="date" class="form-control" id="fechaSalida" value="fechaSalida">
-                        </div>
+                            <input name="fechaSalida" type="date" class="form-control" id="fechaSalida" value="{{old('fechaSalida')}}">
+                            @error('fechaSalida')
+                                <p class="text-warning">{{ $message }}</p>
+                            @enderror
+                          </div>
                         
                         <div class="col-md-6">
-                          <label for="cantidadDePersonas" class="form-label text-light">Cantidad de huespedes:</label>
-                          <input name="cantidadDePersonas" type="text" class="form-control" id="cantidadDePersonas" >
-                      </div>
+                          <label for="cantidadDeHuespedes" class="form-label text-light">Cantidad de huespedes:</label>
+                          <input name="cantidadDeHuespedes" type="text" class="form-control" id="cantidadDeHuespedes" value="{{old('cantidadDeHuespedes')}}" >
+                          @error('cantidadDeHuespedes')
+                                <p class="text-warning">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
                     <div class="row d-flex justify-content-center mx-1">
                       <div class="col-md-6 text-center pb-3">
