@@ -9,6 +9,7 @@
         <nav>
            <ul class="nav-links">
                 <li><a href="#">HOME</a></li>
+                <li><a href="{{url('/registro/huesped')}}">REGISTRO</a></li>
                 <li><a href="{{url('/reserva')}}">RESERVAS</a></li>
                 <li><a href="{{url('/listaHabitacion')}}">LISTA DE HABITACIONES</a></li>
            </ul>            
@@ -18,7 +19,7 @@
   
     <body>
     
-    <h1 class="title">LISTA DE MOTELES</h1>
+    <h1 class="title">LISTA DE HOTELES</h1>
 <br><br>
     <div class="container__slider">
 
