@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservaHabitacionController;
-use App\Http\Controllers\RegistroHabitacionController;
+use App\Http\Controllers\RegistroHuespedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +20,5 @@ Route::get('/', function () {
 });
 Route::get('/reserva', [ReservaHabitacionController::class,'index'])->name('reserva');
 Route::post('/reserva', [ReservaHabitacionController::class,'filtrar'])->name('reserva.seleccionarFecha');
-Route::get('/registro/habitacion', [RegistroHabitacionController::class,'index'])->name('registro.habitacion');
+Route::get('/registro/huesped', [RegistroHuespedController::class,'index'])->name('registro.huesped');
+
