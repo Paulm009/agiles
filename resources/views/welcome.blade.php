@@ -6,7 +6,7 @@
         <title>Home</title>
     </header>
   
-    @extends('nav')
+    @extends('layout')
     @section('content')
         <div class="hero">
             <h1 class="title">Bienvenido al Hotel</h1>
