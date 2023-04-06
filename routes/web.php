@@ -21,3 +21,6 @@ Route::get('/', function () {
 Route::get('/reserva', [ReservaHabitacionController::class,'index'])->name('reserva');
 Route::post('/reserva', [ReservaHabitacionController::class,'filtrar'])->name('reserva.seleccionarFecha');
 Route::get('/registro/huesped', [RegistroHuespedController::class,'index'])->name('registro.huesped');
+Route::get('/nav',function() {
+    return view('nav');
+});

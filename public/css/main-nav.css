@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;800&display=swap');
+
+.navbar-brand.logo {
+    font-family: 'Nunito', sans-serif !important;
+    font-size: 50px !important;
+    font-weight: bold !important;
+}
+.navbar a {
+    font-family: 'Nunito', sans-serif !important;
+    font-size: 20px !important;
+}
+.navbar li {
+    text-align: center;
+}

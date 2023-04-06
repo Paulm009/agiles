@@ -1,22 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
     <header class="header">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
-        <link href="/css/nav.css" rel="stylesheet">
-        <div class="logo">
-            <h1 class="text-light">Gestion de hoteles</h1>
-        </div>
-        <nav class="navbar-expand-sm menu">
-           <ul class="nav-links">
-                <li><a href="{{url('/')}}">HOME</a></li>
-                <li><a href="{{url('/reserva')}}">RESERVAS</a></li>
-                <li><a href="#">LISTA DE HABITACIONES</a></li>
-           </ul>            
-        </nav>
-        
+      <title>Reserva</title>
     </header>
-<body>
+    @extends('nav')
+    @section('content')
     <div class="pt-3 row">
         <section class="text-center row">
           <h2 class="" >Reserva de habitaciones</h2>
@@ -75,7 +63,7 @@
                     <section class=" room-list text-center">
                         <div class="d-flex flex-column  flex-shrink-0 bg-white" ">
                             <div class="list-group list-group-flush border-bottom scrollarea">
-                              {{-- @foreach ($habitaciones as $habitacion)
+                              @foreach ($habitaciones as $habitacion)
                                 <div class=" list-group-item card my-3 mx-2 shadow" >
                                     <div class="row g-0">
                                       <div class="col-md-5 d-flex align-items-center">
@@ -95,64 +83,7 @@
                                       </div>
                                     </div>
                                   </div>
-                              @endforeach --}}
-                              <div class=" list-group-item card my-3 mx-2 shadow" >
-                                <div class="row g-0">
-                                  <div class="col-md-5 d-flex align-items-center">
-                                    <img src="{{URL::asset('storage/habitaciones/Hsimple.jpg' )}}" class="img-fluid rounded-start" alt="simple">
-                                  </div>
-                                  <div class="col-md-7">
-                                    <div class="card-body">
-                                      <h5 class="card-title">Habiacion simple </h5>
-                                      <h6 class="card-subtitle mb-2 text-muted">Mi Habit 1</h6>
-                                      <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore libero dolorem doloribus repellat illum, deleniti et commodi possimus blanditiis facilis? Nisi natus consectetur aperiam veritatis officia accusantium, praesentium placeat esse.</p>
-                                      <div class="row">
-
-                                        <p class="card-text"> <small class="text-muted">Precio: 600 Bs</small></p>
-                                        <a href="#" class="btn btn-warning">Reservar</a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class=" list-group-item card my-3 mx-2 shadow" >
-                                <div class="row g-0">
-                                  <div class="col-md-5 d-flex align-items-center">
-                                    <img src="{{URL::asset('storage/habitaciones/Hsimple.jpg' )}}" class="img-fluid rounded-start" alt="simple">
-                                  </div>
-                                  <div class="col-md-7">
-                                    <div class="card-body">
-                                      <h5 class="card-title">Habiacion doble </h5>
-                                      <h6 class="card-subtitle mb-2 text-muted">Mi Habit 1</h6>
-                                      <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore libero dolorem doloribus repellat illum, deleniti et commodi possimus blanditiis facilis? Nisi natus consectetur aperiam veritatis officia accusantium, praesentium placeat esse.</p>
-                                      <div class="row">
-
-                                        <p class="card-text"> <small class="text-muted">Precio: 600 Bs</small></p>
-                                        <a href="#" class="btn btn-warning">Reservar</a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class=" list-group-item card my-3 mx-2 shadow" >
-                                <div class="row g-0">
-                                  <div class="col-md-5 d-flex align-items-center">
-                                    <img src="{{URL::asset('storage/habitaciones/Hsimple.jpg' )}}" class="img-fluid rounded-start" alt="simple">
-                                  </div>
-                                  <div class="col-md-7">
-                                    <div class="card-body">
-                                      <h5 class="card-title">Habiacion triple </h5>
-                                      <h6 class="card-subtitle mb-2 text-muted">Mi Habit 1</h6>
-                                      <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore libero dolorem doloribus repellat illum, deleniti et commodi possimus blanditiis facilis? Nisi natus consectetur aperiam veritatis officia accusantium, praesentium placeat esse.</p>
-                                      <div class="row">
-
-                                        <p class="card-text"> <small class="text-muted">Precio: 600 Bs</small></p>
-                                        <a href="#" class="btn btn-warning">Reservar</a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
+                              @endforeach
                             </div>
                         </div>
                     </section>
@@ -172,5 +103,6 @@
     <script>
         document.getElementById("fechaIngreso").min = new Date("YY-mm-dd").toISOString().slice(0,10);
     </script>
+    @endsection
 
 </body>
