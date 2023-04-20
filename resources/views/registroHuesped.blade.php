@@ -50,10 +50,7 @@
           <input type="tel" id="telefono" name="telefono" required>
         </div>
        
-        <div class="col-md-12">
-          <label for="num-personas">Número de personas:</label>
-          <input type="number" id="num-personas" name="num-personas" min="1" required>
-        </div>
+        
         <div class="col-md-6 text-center pb-3">
           <button type="submit" class="btn w-100 btn-warning">Enviar</button>
       </div>
