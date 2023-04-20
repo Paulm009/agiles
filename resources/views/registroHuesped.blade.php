@@ -49,14 +49,7 @@
           <label for="telefono">Teléfono:</label>
           <input type="tel" id="telefono" name="telefono" required>
         </div>
-        <div class="col-md-12">
-          <label for="fecha-llegada">Fecha de llegada:</label>
-          <input type="date" id="fecha-llegada" name="fecha-llegada" required>
-        </div>
-        <div class="col-md-12">
-          <label for="fecha-salida">Fecha de salida:</label>
-          <input type="date" id="fecha-salida" name="fecha-salida" required>
-        </div>
+       
         <div class="col-md-12">
           <label for="num-personas">Número de personas:</label>
           <input type="number" id="num-personas" name="num-personas" min="1" required>
