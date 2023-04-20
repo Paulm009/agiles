@@ -12,6 +12,6 @@ class RegistroHuespedController extends Controller
         return view('registroHuesped');
     }
     public function envio(Request $request){
-        
+        return $request->nombre;
     }
 }
