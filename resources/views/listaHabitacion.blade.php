@@ -1,22 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <header class="header">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
-  <link href="/css/nav.css" rel="stylesheet">
-  <div class="logo">
-    <h1 class="text-light">Gestion de hoteles</h1>
-  </div>
-  <nav class="navbar-expand-sm menu">
-    <ul class="nav-links">
-      <li><a href="{{url('/')}}">HOME</a></li>
-      <li><a href="{{url('/reserva')}}">RESERVAS</a></li>
-      <li><a href="{{url('/listaHabitacion')}}">LISTA DE HABITACIONES</a></li>
-    </ul>
-  </nav>
+    <title>Lista De Habitaciones</title>
 </header>
 
-<body>
+@extends('layout')
+@section('content')
   <div class="container">
     <div class="row justify-content-center">
       <section>
@@ -70,6 +59,6 @@
       </div>
     </div>
   </div>
-</body>
+@endsection
 
 </html>
