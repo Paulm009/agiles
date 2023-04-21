@@ -57,7 +57,7 @@
       </div>
       <div class="col-md-12 mb-2">
         <div style="text-align:right">
-          <button type="button" id="btnSalir" class="btn btn-danger text-center btnSalir">Salir</button>
+          <a type="button" href="{{route('home')}}" class="btn btn-danger text-center btnSalir">Salir</a>
         </div>
       </div>
     </div>
