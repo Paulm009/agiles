@@ -21,12 +21,6 @@ class ReservaHabitacionController extends Controller
             'fechaSalida' => 'required',
             'cantidadDeHuespedes' => ['required','integer'],
         ]);
-        // return $request;
-        $habitaciones = Habitacion::select()->OrderBy("habitacion.idTipo")
-                        ->join('tipo','habitacion.idTipo','=','tipo.idTipo')
-                        ->get();
-        // $habitaciones = [c3n est\u00e1 decorada en tonos neutros y c\u00e1lidos para\r\n                             complementar la alfombra.","created_at"=>"2023-03-24T17:01:03.000000Z","updated_at"=>null,"tipoHabitacion"=>"Simple"]];
-        // $habitaciones = [1];
-        return view('formularioReserva',compact('habitaciones'));
-    }
+        return $request;
+        }
 }

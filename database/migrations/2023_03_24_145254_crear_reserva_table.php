@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer("montoRecepcionado");
             $table->string("ubicacionComprobante",100);
             $table->timestamps();
-            $table->foreign("idCliente")->references("idCliente")->on('cliente');
+            $table->foreign("idCliente")->references("idCliente")->on('clientes');
             $table->foreign("idHabitacion")->references("idHabitacion")->on('habitacion');
 
         });

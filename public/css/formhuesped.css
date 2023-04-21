@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;800&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    
+}
+
+
+
+
+
+.header .logo{
+    cursor: pointer;
+    order: 3;
+    margin-left: auto;
+}
+
+.header .logo img{
+    height: 70px;
+    width: auto;
+    transition: all 0.3s;
+}
+
+.header .logo img:hover{
+    transform: scale(1.2);
+}
+
+.header nav{
+    order: 1;
+}
+
+.header .nav-links{
+    list-style: none;
+}
+
+.header .nav-links li{
+    display: inline-block;
+    padding: 0 20px;    
+}
+
+.header .nav-links li:nth-child(1){
+    padding: 0 20px 0 0;
+}
+
+.header .nav-links li:hover{
+    transform: scale(1.1);
+}
+
+
+
+
+
+
+
+
+
+
+body{
+  background: #ceccca;
+}
+  
+  /* Estilo para el formulario */
+  form {
+    margin: 0 auto; /* Centrar el formulario */
+    max-width: 500px;
+    padding: 20px;
+    color: white;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  }
+  
+  /* Estilo para las etiquetas */
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  /* Estilo para los campos de entrada */
+  input[type=text], input[type=email], input[type=tel], input[type=date], input[type=number] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo para el botón de envío */
+  input[type=submit] {
+    background-color: #39CCCC;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Estilo para el botón de envío al pasar el ratón por encima */
+  input[type=submit]:hover {
+    background-color: #2E8B57;
+  }
