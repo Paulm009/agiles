@@ -22,20 +22,31 @@
       <div class="col-md-12">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required>
+        @error('nombre')
+          <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
       </div>
       <div class="col-md-12">
 
         <label for="apellidos">Apellidos:</label>
         <input type="text" id="apellidos" name="apellidos" required>
-        
+        @error('apellidos')
+          <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
       </div>
       <div class="col-md-12">
         <label for="email">Correo electrónico:</label>
         <input type="email" id="email" name="email" required>
+        @error('email')
+          <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
       </div>
       <div class="col-md-12">
         <label for="telefono">Teléfono:</label>
         <input type="tel" id="telefono" name="telefono" required>
+        @error('telefono')
+          <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
       </div>
       <div class="col-md-6 text-center pb-3">
         <button type="submit" class="btn w-100 btn-warning">Enviar</button>
