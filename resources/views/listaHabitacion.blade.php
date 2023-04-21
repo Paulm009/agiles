@@ -2,6 +2,8 @@
 <html lang="es">
 <header class="header">
     <title>Lista De Habitaciones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"/> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 </header>
 
 @extends('layout')
@@ -18,7 +20,7 @@
       </section>
       <div class="col-md-12 mb-2">
         <br>
-        <button id="BotonAgregarHabitacion" type="button" class="btn btn-sm btn-warning">Nueva Habitacion</button>
+        <button id="BotonAgregarHabitacion" type="button" class="btn btn-sm btn-success"><span class="bi bi-plus-circle"></span>&nbsp;Nueva Habitacion</button>
       </div>
       <br>
       <div class="col-md-12 mb-2">
@@ -43,8 +45,9 @@
                 <td>{{$item->capacidad }}</td>
                 <td>{{$item->precio }}</td>
                 <td>
-                  <button type="button" class="btn btn-primary btn-sm">Modificar</button>
-                  <button type="button" class="btn btn-danger  btn-sm">Eliminar</button>
+                
+                  <button type="button" class="btn btn-warning text-light btn-sm"><span class="bi bi-pencil"></span>&nbsp;Modificar</button>
+                  <button type="button" class="btn btn-danger  btn-sm bi"><span class="bi bi-trash"></span>&nbsp;Eliminar</button>
                 </td>
               </tr>
               @endforeach
