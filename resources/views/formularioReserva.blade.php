@@ -11,7 +11,7 @@
            <ul class="nav-links">
                 <li><a href="{{url('/')}}">HOME</a></li>
                 <li><a href="{{url('/reserva')}}">RESERVAS</a></li>
-                <li><a href="#">LISTA DE HABITACIONES</a></li>
+                <li><a href="{{url('/listaHabitacion')}}">LISTA DE HABITACIONES</a></li>
            </ul>            
         </nav>
         
@@ -19,7 +19,7 @@
 <body>
     <div class="pt-3 row">
         <section class="text-center row">
-                <h2 class="" >Reserva de habitaciones</h2>
+          <h2 class="" >Reserva de habitaciones</h2>
             
         </section>
         <section class="form-reserva mx-5 row">
@@ -31,21 +31,36 @@
                         <hr>
                         <div class="col-md-6">
                             <label for="fechaIngreso" class="form-label text-light">Fecha de ingreso:</label>
-                            <input id="fechaIngreso" name="fechaIngreso" type="date"  class="form-control" min="">
-                        </div>
+                            <input id="fechaIngreso" name="fechaIngreso" type="date"  class="form-control" min="" value="{{old('fechaIngreso')}}">
+                            @error('fechaIngreso')
+                                <p class="text-warning">{{ $message }}</p>
+                            @enderror
+                          </div>
                         <div class="col-md-6">
                             <label for="fechaSalida" class="form-label text-light">Fecha de salida:</label>
-                            <input name="fechaSalida" type="date" class="form-control" id="fechaSalida" value="fechaSalida">
-                        </div>
+                            <input name="fechaSalida" type="date" class="form-control" id="fechaSalida" value="{{old('fechaSalida')}}">
+                            @error('fechaSalida')
+                                <p class="text-warning">{{ $message }}</p>
+                            @enderror
+                          </div>
                         
                         <div class="col-md-6">
-                          <label for="numeroHabitacion" class="form-label text-light">Numero de habitaciones:</label>
-                          <input name="numeroHabitacion" type="date" class="form-control" id="numeroHabitacion" value="fechaSalida">
+                          <label for="cantidadDeHuespedes" class="form-label text-light">Cantidad de huespedes:</label>
+                          <input name="cantidadDeHuespedes" type="text" class="form-control" id="cantidadDeHuespedes" value="{{old('cantidadDeHuespedes')}}" >
+                          @error('cantidadDeHuespedes')
+                                <p class="text-warning">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center mx-1">
+                      <div class="col-md-6 text-center pb-3">
+                        <a type="button" href="{{route('home')}}" class="btn w-100 btn-warning">Cancelar</a>
+                      </div>
+                      <div class="col-md-6 text-center pb-3">
+                          <button type="submit" class="btn w-100 btn-warning">Ver Disponibilidad</button>
                       </div>
                     </div>
-                    <div class="col-md-12 text-center pb-3">
-                        <button type="submit" class="btn btn-warning text-light">Ver Disponibilidad</button>
-                    </div>
+                    
                </form>
             </div>
             <div class="col-3"></div>

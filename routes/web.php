@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservaHabitacionController;
 use App\Http\Controllers\RegistroHuespedController;
-
+use App\Http\Controllers\listarHabitacionesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,8 +17,9 @@ use App\Http\Controllers\RegistroHuespedController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 Route::get('/reserva', [ReservaHabitacionController::class,'index'])->name('reserva');
 Route::post('/reserva', [ReservaHabitacionController::class,'filtrar'])->name('reserva.seleccionarFecha');
 Route::get('/registro/huesped', [RegistroHuespedController::class,'index'])->name('registro.huesped');
 Route::post('/registro/huesped', [RegistroHuespedController::class,'envio'])->name('registro.huesped');
+Route::get('/listaHabitacion', [listarHabitacionesController::class,'index'])->name('habitaciones');
