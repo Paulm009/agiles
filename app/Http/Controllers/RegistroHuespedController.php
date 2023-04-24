@@ -19,9 +19,9 @@ class RegistroHuespedController extends Controller
             'nombre' => 'required | max:20 | alpha',
             'apellidos' => 'required | max:40 | alpha',
             'email' => 'required | email',
-            'telefono' => ['required',
-                            'regex:/^(\\+591)[6|7][0-9]{7}$/'
-                    ],
+            'telefono' => 'required',
+                            
+            
 
          ],['nombre.required' => 'obligatorio',
             'nombre.max' => 'maximo 20 caracteres',
@@ -44,7 +44,9 @@ class RegistroHuespedController extends Controller
         $cliente->save();
 
         // Puedes redirigir al usuario a otra página una vez que los datos han sido guardados
+        
+        return response()->json(['success' => true]);
         return back() -> with('succes','Ingeso  correcto');
-
+        
     }
 }
