@@ -51,7 +51,7 @@
           </div>
           <div class="col-2"></div>
       </section>
-      {{-- <section class="pt-4 habitaciones">
+      <section class="pt-4 habitaciones">
           @if($habitaciones != [])
           <div class="row">
               <div class="col-2">
@@ -65,7 +65,7 @@
                               <div class=" list-group-item card my-3 mx-2 shadow" >
                                   <div class="row g-0">
                                     <div class="col-md-5 d-flex align-items-center">
-                                      <img src="{{URL::asset('storage/habitaciones/Hsimple.jpg' )}}" class="img-fluid rounded-start" alt="simple">
+                                      <img src="{{URL::asset('img/habi.jpg' )}}" class="img-fluid rounded-start" alt="simple">
                                     </div>
                                     <div class="col-md-7">
                                       <div class="card-body">
@@ -92,7 +92,7 @@
               </div>
             </div>
           @endif
-      </section> --}}
+      </section>
     
     <script>
         document.getElementById("fechaIngreso").min = new Date("YY-mm-dd").toISOString().slice(0,10);
