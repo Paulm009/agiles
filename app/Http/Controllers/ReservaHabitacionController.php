@@ -5,6 +5,7 @@ use Illuminate\Support\Pluralizer;
 use App\Models\Habitacion;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ReservaHabitacionController extends Controller
 {
@@ -17,10 +18,33 @@ class ReservaHabitacionController extends Controller
     {
         Pluralizer::useLanguage('spanish');
         $request->validate([
-            'fechaIngreso' => 'required',
-            'fechaSalida' => 'required',
+            'fechaIngreso' => [
+                'required',
+                'date',
+                'after_or_equal:'.(now()->format('Y-m-d')), // Verifica que la fecha sea igual o posterior a la fecha actual
+            ],
+            'fechaSalida' => [
+                'required',
+                'date',
+                'after:'.(request()->input('fechaIngreso')), // Verifica que la fecha sea igual o posterior a la fecha actual
+            ],
             'cantidadDeHuespedes' => ['required','integer'],
         ]);
-        return $request;
+        $habitaciones = Habitacion::whereNotIn('idHabitacion', function ($query) {
+            $query->select('idHabitacion')
+                ->from('reserva')
+                ->where(function ($query) {
+                    $query->where('fechaInicio', '>=', request()->input('fechaIngreso'))
+                        ->where('fechaFin', '<=', request()->input('fechaSalida'));
+                })
+                ->orWhere(function ($query) {
+                    $query->where('fechaInicio', '<=', request()->input('fechaIngreso'))
+                        ->where('fechaFin', '>=', request()->input('fechaSalida'));
+                });
+        })
+        ->orderBy('idHabitacion')
+        ->get();
+        // return $habitaciones;
+        return view('formularioReserva',compact('habitaciones'));
         }
 }
