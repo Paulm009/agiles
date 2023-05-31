@@ -22,4 +22,4 @@ Route::get('/reserva', [ReservaHabitacionController::class,'index'])->name('rese
 Route::post('/reserva', [ReservaHabitacionController::class,'filtrar'])->name('reserva.seleccionarFecha');
 Route::get('/registro/huesped', [RegistroHuespedController::class,'index'])->name('registro.huesped');
 Route::post('/registro/huesped', [RegistroHuespedController::class,'envio'])->name('registro.huesped.envio');
-Route::get('/listaHabitacion', [listarHabitacionesController::class,'index'])->name('habitaciones');
+Route::resource('/listaHabitacion', listarHabitacionesController::class);
