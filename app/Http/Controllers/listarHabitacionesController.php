@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Habitacion;
+use App\Models\Tipo;
 
 class listarHabitacionesController extends Controller
 {
@@ -13,8 +14,8 @@ class listarHabitacionesController extends Controller
      */
     public function index()
     {
-        $habitacion = Habitacion::all();
-        return view ('listaHabitacion')->with('habitacion', $habitacion);
+        $habitacion = Habitacion::with('tipo')->paginate(5);
+        return view ('habitaciones.listaHabitacion')->with('habitacion', $habitacion);
         //return view('formularioReserva',compact('habitacion'));
     }
 
@@ -23,7 +24,8 @@ class listarHabitacionesController extends Controller
      */
     public function create()
     {
-        //
+        $tipos= Tipo::all();
+        return view('habitaciones.create',compact('tipos'));
     }
 
     /**
@@ -31,7 +33,23 @@ class listarHabitacionesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'idTipo' => 'required',
+            'nombreHabitacion' => 'required|min:10|string',
+            'precio' => 'required|numeric|min:1',
+            'capacidad' => 'required|numeric|min:1',
+            'precioDescuento' => 'required|numeric|min:1',
+            'descripcion' => 'required|string|min:4'
+        ], [
+            'idTipo.required' => 'idTipo field is required.',
+            'nombreHabitacion.required' => 'nombreHabitacion field is required.',
+            'precio.required' => 'precio field is required.',
+            'capacidad.required' => 'capacidad field is required.',
+            'precioDescuento.required' => 'precioDescuento field is required.',
+            'descripcion.required' => 'descripcion field is required.',
+        ]);
+        $habitacion = Habitacion::create($validatedData);          
+        return redirect('listaHabitacion')->with('success', 'Habitacion creada exitosamente.');
     }
 
     /**
@@ -39,7 +57,7 @@ class listarHabitacionesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return "show";
     }
 
     /**
@@ -47,7 +65,9 @@ class listarHabitacionesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $tipos= Tipo::all();
+        $habitacion = Habitacion::find($id);
+        return view('habitaciones.edit',compact('habitacion','tipos'));
     }
 
     /**
@@ -55,7 +75,24 @@ class listarHabitacionesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'idTipo' => 'required',
+            'nombreHabitacion' => 'required|min:10|string',
+            'precio' => 'required|numeric|min:1',
+            'capacidad' => 'required|numeric|min:1',
+            'precioDescuento' => 'required|numeric|min:1',
+            'descripcion' => 'required|string|min:4'
+        ], [
+            'idTipo.required' => 'idTipo field is required.',
+            'nombreHabitacion.required' => 'nombreHabitacion field is required.',
+            'precio.required' => 'precio field is required.',
+            'capacidad.required' => 'capacidad field is required.',
+            'precioDescuento.required' => 'precioDescuento field is required.',
+            'descripcion.required' => 'descripcion field is required.',
+        ]);
+        $habitacion = Habitacion::find($id);
+        $habitacion->update($validatedData);       
+        return redirect('listaHabitacion')->with('success', 'Habitacion editada exitosamente.');
     }
 
     /**
@@ -63,6 +100,12 @@ class listarHabitacionesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $habitacion = Habitacion::find($id);
+        if ($habitacion) {
+            $habitacion->delete();       
+            return redirect('listaHabitacion')->with('success', 'Habitacion eliminada exitosamente.');
+        }else{
+            return back()->withInput()->with('error',  'Habitacion delete failed.');
+        }
     }
 }
