@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;800&display=swap');
+@import url('https://fonts.google.com/specimen/Inter?query=inter ');
 
 .navbar-brand.logo {
-    font-family: 'Nunito', sans-serif !important;
-    font-size: 50px !important;
-    font-weight: bold !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 50px;
+    font-weight: bold;
 }
 .navbar a {
-    font-family: 'Nunito', sans-serif !important;
-    font-size: 20px !important;
+    font-family: 'Inter', sans-serif; 
+    font-size: 20px;
 }
 .navbar li {
-    text-align: center;
+    font-size: 10px;
 }

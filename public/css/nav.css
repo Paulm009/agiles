@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;800&display=swap');
+
+@import url('https://fonts.google.com/specimen/Inter?query=inter ');
+
 
 *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Nunito', sans-serif;
-    font-size: 20px;
-    
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;    
 }
-
 
 
 .header{
