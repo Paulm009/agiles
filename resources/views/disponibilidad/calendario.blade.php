@@ -122,19 +122,18 @@
 
                 
               } else {
-                // Clear previous range selection
+                // Limpiar un rango previo seleccionado
                 if (!changeMonth) {
                   clearRangeSelection();
                 }
                 
 
-                // Select new start date
+                // Seleccionar una nueva fecha
                 selectedStartDate = {'day':parseInt(this.innerHTML),
                                     'month':month,
                                     'cell':this};
-                // this.classList.add("selected-day");
               }
-              // Highlight the range of dates
+              // Resaltar rago de fechas
               highlightDateRange();
             });
 
@@ -164,16 +163,11 @@
     }
 
     function highlightDateRange() {
-      console.log("--------Entro a seleccionar---------");
-      console.log(selectedStartDate);
-      console.log(selectedEndDate);
       if (selectedStartDate && selectedEndDate) {
-        //verify days of month
+        //verifica los dias de un mes
         var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
         var rangeDays = document.querySelectorAll(".range-day");
-        // rangeDays.forEach(function(day) {
-        //   day.classList.remove("range-day");
-        // });
+        
         var startDate = selectedStartDate.day;
         var monthOfStartDay = selectedStartDate.month
         var endDate = selectedEndDate.day;
