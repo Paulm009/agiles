@@ -163,6 +163,9 @@
     }
 
     function highlightDateRange() {
+      console.log("--------------------");
+      console.log(selectedEndDate);
+      console.log(selectedStartDate);
       if (selectedStartDate && selectedEndDate) {
         //verifica los dias de un mes
         var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
@@ -182,10 +185,23 @@
           for (var j = 0; j < cells.length; j++) {
             var cell = cells[j];
             var day = parseInt(cell.innerHTML);
-            console.log(cell);
-            if ((day >= startDate && day <= endDate) || (day >= endDate && day <= startDate)) {
+            if (day >= startDate && currentMonth == monthOfStartDay) {
+              if ((currentMonth != monthOfEndDay) || (day <= endDate) ) {
+                cell.classList.add("range-day");
+              }
+            }
+            if (day <= endDate && currentMonth == monthOfEndDay) {
+              if ((currentMonth != monthOfStartDay) || (day >= startDate) ) {
+                cell.classList.add("range-day");
+              }
+            }
+            if((currentMonth > monthOfStartDay && currentMonth < monthOfEndDay) ){
               cell.classList.add("range-day");
             }
+            // if ((day >= startDate && day <= endDate && currentMonth == monthOfStartDay) 
+            //     || (day >= endDate && day <= startDate && currentMonth == monthOfEndDay)) {
+            //   cell.classList.add("range-day");
+            // }
           }
         }
       }
