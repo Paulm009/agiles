@@ -108,11 +108,13 @@
             cell.addEventListener("click", function() {
               if (!selectedStartDate) {
                 // Select start date
+                console.log(this)
+                this.classList.add("selected-day");
                 selectedStartDate = {'day':parseInt(this.innerHTML),
                                     'month':month,
                                     'cell':this};
                 // selectedStartDate = this;
-                this.classList.add("selected-day");
+                
               } else if (!selectedEndDate) {
                 // Select end date
                 selectedEndDate = {'day':parseInt(this.innerHTML),
@@ -129,6 +131,7 @@
                 
 
                 // Seleccionar una nueva fecha
+                this.classList.add("selected-day");
                 selectedStartDate = {'day':parseInt(this.innerHTML),
                                     'month':month,
                                     'cell':this};
@@ -167,6 +170,11 @@
       console.log(selectedEndDate);
       console.log(selectedStartDate);
       if (selectedStartDate && selectedEndDate) {
+        if(selectedEndDate.month < selectedStartDate.month || (selectedEndDate.month == selectedStartDate.month && selectedEndDate.day < selectedStartDate.day)){
+          var temp = selectedEndDate;
+          selectedEndDate = selectedStartDate;
+          selectedStartDate = temp;
+        }
         //verifica los dias de un mes
         var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
         var rangeDays = document.querySelectorAll(".range-day");
@@ -185,23 +193,11 @@
           for (var j = 0; j < cells.length; j++) {
             var cell = cells[j];
             var day = parseInt(cell.innerHTML);
-            if (day >= startDate && currentMonth == monthOfStartDay) {
-              if ((currentMonth != monthOfEndDay) || (day <= endDate) ) {
-                cell.classList.add("range-day");
-              }
-            }
-            if (day <= endDate && currentMonth == monthOfEndDay) {
-              if ((currentMonth != monthOfStartDay) || (day >= startDate) ) {
-                cell.classList.add("range-day");
-              }
-            }
-            if((currentMonth > monthOfStartDay && currentMonth < monthOfEndDay) ){
-              cell.classList.add("range-day");
-            }
-            // if ((day >= startDate && day <= endDate && currentMonth == monthOfStartDay) 
-            //     || (day >= endDate && day <= startDate && currentMonth == monthOfEndDay)) {
-            //   cell.classList.add("range-day");
-            // }
+            if ((day >= startDate && currentMonth == monthOfStartDay && (currentMonth != monthOfEndDay || day <= endDate)) ||
+              (day <= endDate && currentMonth == monthOfEndDay && (currentMonth != monthOfStartDay || day >= startDate)) ||
+              (currentMonth > monthOfStartDay && currentMonth < monthOfEndDay)) {
+            cell.classList.add("range-day");
+          }
           }
         }
       }
