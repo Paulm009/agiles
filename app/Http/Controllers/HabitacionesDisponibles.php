@@ -11,8 +11,9 @@ use Illuminate\Http\Request;
 
 class HabitacionesDisponibles extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        return view('habitacionDisponible');
+        $habitacion = Habitacion::with('tipo')->get();
+        return view ('habitacionDisponible')->with('habitacion', $habitacion);
     }
 }
