@@ -66,9 +66,9 @@
                     <a class="nav-link dropdown-toggle" href="#" id="dropdownServicios" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">Servicios</a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownServicios">
-                        <li><a class="dropdown-item" href="#">Servicio de Limpieza</a></li>
-                        <li><a class="dropdown-item" href="#">Servicio de Minibar</a></li>
-                        <li><a class="dropdown-item" href="#">Recojo en el Aeropuerto</a></li>
+                        <li><a class="dropdown-item" href="#">Crear servicio</a></li>
+                        <li><a class="dropdown-item" href="#">Agregar servicio por habitacion</a></li>
+                        <li><a class="dropdown-item" href="#">Actualizar servicios</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -77,7 +77,7 @@
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownAdministracion">
                         <li class="dropdown" onclick="displayReportList()" onmousemove="displayReportList()" onmouseleave="contractReportList()">
                             <a class="dropdown-item dropdown-toggle inside" href="#" id="dropdownReportes"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false" onmousewheel="" >Reportes</a>
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false" onmousewheel="">Reportes</a>
                             <ul class="dropdown-menu-dark inside" id="report-type-list" aria-labelledby="dropdownReportes">
                                 <li><a class="dropdown-item" href="#">Reportes Diarios</a></li>
                                 <li><a class="dropdown-item" href="#">Reportes Semanales</a></li>
@@ -97,7 +97,7 @@
 <script>
     function displayReportList() {
         var reportOptions = document.getElementById("report-type-list");
-        reportOptions.style.display = "block"
+        reportOptions.style.display = "block";
     }
     function contractReportList() {
         var reportOptions = document.getElementById("report-type-list");
