@@ -1,0 +1,31 @@
+table {
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid black;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .block-day {
+    background-color: #27272a !important;
+    color: #474747;
+  }
+  .current-day {
+    background-color: #FBBA31 !important;
+    color: black;
+  }
+  .selected-day {
+    background-color: lightblue !important;
+    color: black;
+  }
+  .range-day {
+    background-color: #dddbd9 !important;
+    color: black;
+  }
+  .days-selected {
+    background-color: #FBBA31 !important;
+    color: #1F1706;
+  }
+  #calendarTable th, td{
+     border: 0 !important;
+  }

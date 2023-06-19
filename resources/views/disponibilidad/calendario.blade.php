@@ -1,51 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Calendario HTML</title>
-  <style>
-    table {
-      border-collapse: collapse;
-    }
-    th, td {
-      border: 1px solid black;
-      padding: 10px;
-      cursor: pointer;
-    }
-    .current-day {
-      background-color: yellow;
-    }
-    .selected-day {
-      background-color: lightblue;
-    }
-    .range-day {
-      background-color: #c0d9ff;
-    }
-  </style>
+  <title>Calendario</title>
+  <link href="/css/disponibilidad.css" rel="stylesheet">
 </head>
 <body>
 
   <h2>Calendario</h2>
 
-  <div>
-    <button id="prevBtn">Anterior</button>
-    <span id="monthYear"></span>
-    <button id="nextBtn">Siguiente</button>
+  
+  <div class="row">
+    <div class="col px-3 bg-dark ">
+      <div class="text-warning d-flex justify-content-center align-items-center py-3 border-bottom border-warning">
+        <button id="prevBtn" class="btn btn-outline-warning">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+          </svg>
+        </button>
+        <span id="monthYear" class="px-4"></span>
+        <button id="nextBtn" class="btn btn-outline-warning">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+        </button>
+      </div>
+      <table id="calendarTable" class=" table table-dark  mb-0">
+        <thead class="">
+          <tr>
+            <th>Domingo</th>
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miércoles</th>
+            <th>Jueves</th>
+            <th>Viernes</th>
+            <th>Sábado</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="col ps-0 days-selected d-flex justify-content-center align-items-center">
+      <div class="">
+        <div class="row start-day">
+          <div class="tittle">
+            <h2>Fecha Desde:</h2>
+          </div>
+          <div class="date-data mb-2">
+            <h3 id="s-day" class="mb-0">**</h3>
+            <p id="s-day-week" class="mb-0">*****</p>
+            <p id="s-month-year" class="mb-0">**********</p>
+          </div>
+          
+        </div>
+        <div class="row end-day">
+          <div class="tittle">
+            <h2>Fecha Hasta:</h2>
+          </div>
+          <div class="date-data mb-2">
+            <h3 id="s-day" class="mb-0">19</h3>
+            <p id="s-month" class="mb-0">Lunes</p>
+            <p id="s-month" class="mb-0">Junio/2023</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <table id="calendarTable">
-    <thead>
-      <tr>
-        <th>Domingo</th>
-        <th>Lunes</th>
-        <th>Martes</th>
-        <th>Miércoles</th>
-        <th>Jueves</th>
-        <th>Viernes</th>
-        <th>Sábado</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  
 
   <script>
     var currentMonth = new Date().getMonth();
@@ -79,6 +99,7 @@
 
     function renderCalendar(month, year) {
       var today = new Date();
+      today.setHours(0,0,0,0);
       var currentMonth = today.getMonth();
       var currentYear = today.getFullYear();
 
@@ -97,17 +118,37 @@
         for (var j = 0; j < 7; j++) {
           if (i === 0 && j < firstDay) {
             var cell = row.insertCell();
+            cell.innerHTML = ".";
+            cell.addEventListener("click", function() {
+            document.getElementById("prevBtn").click();
+            });
           } else if (date > daysInMonth) {
-            break;
+            var cell = row.insertCell();
+            cell.classList.add("block-day");
+            cell.innerHTML = ".";
+            cell.addEventListener("click", function() {
+            document.getElementById("nextBtn").click();
+            });
           } else {
             var cell = row.insertCell();
             cell.innerHTML = date;
             if (month === currentMonth && year === currentYear && date === today.getDate()) {
               cell.classList.add("current-day");
             }
-            cell.addEventListener("click", function() {
+            console.log(year)
+            var dateodMonth = new Date(year, month, date);
+            console.log(dateodMonth.getTime()+ ">="+ today.getTime());
+            if( year >= currentYear && dateodMonth.getTime() >= today.getTime()){
+              cell.addEventListener("click", function() {
               if (!selectedStartDate) {
                 // Select start date
+                var dayselected = new Date(year,month,parseInt(this.innerHTML))
+                var daystart = document.getElementById("s-day");
+                daystart.innerHTML = this.innerHTML;
+                var dayWeekStart = document.getElementById("s-day-week");
+                dayWeekStart.innerHTML = getDayName(dayselected.getDay());
+                var monthStart = document.getElementById("s-month-year");
+                monthStart.innerHTML = getMonthName(month)+"/"+year;
                 console.log(this)
                 this.classList.add("selected-day");
                 selectedStartDate = {'day':parseInt(this.innerHTML),
@@ -139,6 +180,10 @@
               // Resaltar rago de fechas
               highlightDateRange();
             });
+            } else {
+              cell.classList.add("block-day");
+            }
+            
 
             date++;
           }
@@ -152,12 +197,16 @@
       return monthNames[month];
     }
 
+    function getDayName(day) {
+      var monthNames = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+      return monthNames[day];
+    }
+
     function clearRangeSelection() {
       var rangeDays = document.querySelectorAll(".range-day");
       rangeDays.forEach(function(day) {
         day.classList.remove("range-day");
       });
-
       selectedStartDate.cell.classList.remove("selected-day");
       selectedEndDate.cell.classList.remove("selected-day");
 

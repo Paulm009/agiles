@@ -25,5 +25,5 @@ Route::post('/registro/huesped', [RegistroHuespedController::class,'envio'])->na
 Route::resource('/listaHabitacion', listarHabitacionesController::class);
 
 Route::get('/calendar',function () {
-    return view('disponibilidad.calendario');
+    return view('disponibilidad.disponibilidad');
 });
