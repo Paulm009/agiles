@@ -57,9 +57,9 @@
             <h2>Fecha Hasta:</h2>
           </div>
           <div class="date-data mb-2">
-            <h3 id="s-day" class="mb-0">19</h3>
-            <p id="s-month" class="mb-0">Lunes</p>
-            <p id="s-month" class="mb-0">Junio/2023</p>
+            <h3 id="e-day" class="mb-0">**</h3>
+            <p id="e-day-week" class="mb-0">*****</p>
+            <p id="e-month-year" class="mb-0">**********</p>
           </div>
         </div>
       </div>
@@ -142,27 +142,28 @@
               cell.addEventListener("click", function() {
               if (!selectedStartDate) {
                 // Select start date
-                var dayselected = new Date(year,month,parseInt(this.innerHTML))
-                var daystart = document.getElementById("s-day");
-                daystart.innerHTML = this.innerHTML;
-                var dayWeekStart = document.getElementById("s-day-week");
-                dayWeekStart.innerHTML = getDayName(dayselected.getDay());
-                var monthStart = document.getElementById("s-month-year");
-                monthStart.innerHTML = getMonthName(month)+"/"+year;
                 console.log(this)
                 this.classList.add("selected-day");
                 selectedStartDate = {'day':parseInt(this.innerHTML),
                                     'month':month,
+                                    'year' :year,
                                     'cell':this};
+                showDatesSelected()
                 // selectedStartDate = this;
                 
               } else if (!selectedEndDate) {
                 // Select end date
                 selectedEndDate = {'day':parseInt(this.innerHTML),
                                     'month':month,
+                                    'year' :year,
                                     'cell':this};
                 this.classList.add("selected-day");
-
+                if(selectedEndDate.month < selectedStartDate.month || (selectedEndDate.month == selectedStartDate.month && selectedEndDate.day < selectedStartDate.day)){
+                  var temp = selectedEndDate;
+                  selectedEndDate = selectedStartDate;
+                  selectedStartDate = temp;
+                }
+                showDatesSelected();
                 
               } else {
                 // Limpiar un rango previo seleccionado
@@ -172,9 +173,11 @@
                 
 
                 // Seleccionar una nueva fecha
+                showDatesSelected();
                 this.classList.add("selected-day");
                 selectedStartDate = {'day':parseInt(this.innerHTML),
                                     'month':month,
+                                    'year' :year,
                                     'cell':this};
               }
               // Resaltar rago de fechas
@@ -202,6 +205,45 @@
       return monthNames[day];
     }
 
+    function showDatesSelected(){
+      var daySelected = "**";
+      var dayWeekSelected = "*****";
+      var monthYearSelected = "**********"; 
+      var day = 0;
+      var month = 0;
+      var year = 0;
+      var dateSelected = null;
+      if(selectedStartDate){
+        // in this place the data of the selected start date is replaced
+        day = selectedStartDate.day;
+        month = selectedStartDate.month;
+        year = selectedStartDate.year;
+        dateSelected = new Date(year,month,day);
+        //replace on html.. Fecha Desde
+        daySelected = document.getElementById("s-day");
+        daySelected.innerHTML = day;
+        dayWeekSelected = document.getElementById("s-day-week");
+        dayWeekSelected.innerHTML = getDayName(dateSelected.getDay());
+        monthYearSelected = document.getElementById("s-month-year");
+        monthYearSelected.innerHTML = getMonthName(month)+"/"+year;
+      }
+      if(selectedEndDate){
+        // in this place the data of the selected end date is replaced
+        day = selectedEndDate.day;
+        month = selectedEndDate.month;
+        year = selectedEndDate.year;
+        dateSelected = new Date(year,month,day);
+        //replace on html.. Fecha Hasta
+        daySelected = document.getElementById("e-day");
+        daySelected.innerHTML = day;
+        dayWeekSelected = document.getElementById("e-day-week");
+        dayWeekSelected.innerHTML = getDayName(dateSelected.getDay());
+        monthYearSelected = document.getElementById("e-month-year");
+        monthYearSelected.innerHTML = getMonthName(month)+"/"+year;
+      }
+    
+    }
+
     function clearRangeSelection() {
       var rangeDays = document.querySelectorAll(".range-day");
       rangeDays.forEach(function(day) {
@@ -219,11 +261,7 @@
       console.log(selectedEndDate);
       console.log(selectedStartDate);
       if (selectedStartDate && selectedEndDate) {
-        if(selectedEndDate.month < selectedStartDate.month || (selectedEndDate.month == selectedStartDate.month && selectedEndDate.day < selectedStartDate.day)){
-          var temp = selectedEndDate;
-          selectedEndDate = selectedStartDate;
-          selectedStartDate = temp;
-        }
+        
         //verifica los dias de un mes
         var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
         var rangeDays = document.querySelectorAll(".range-day");
