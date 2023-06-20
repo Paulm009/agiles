@@ -18,6 +18,9 @@
         <li class="nav-item">
             <a class="nav-link" href="{{url('/registro/huesped')}}">Registro</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{url('/listaTipoHabitacion')}}">Tipos de Habitaciones</a>
+        </li>
         </ul>
     </div>
     <div class="text-center w-100 col">

@@ -22,7 +22,8 @@
         <div class="col-md-12 mb-2">
             <br>
             <a href="{{url('listaHabitacion')}}">
-            Atras            </a>
+            <button class="btn btn-danger btn-lg">🔙</button>            
+            </a>
         </div>
         <br>
         <div class="col-md-12 mb-2">

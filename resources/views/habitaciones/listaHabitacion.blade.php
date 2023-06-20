@@ -81,10 +81,10 @@
             @endforeach
           </tbody>
         </table>
-       
-      </div>
+
+    </div>
       <div class="pagination">
-      {{$habitacion->appends(['sort' => 'idHabitacion'])->render();}}
+      {{ $habitacion->appends(['sort' => 'idHabitacion'])->render() }}
       </div>
     </div>
     <div class="col-md-12 mb-2">
