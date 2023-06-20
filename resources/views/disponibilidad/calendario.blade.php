@@ -6,9 +6,9 @@
 </head>
 <body>
 
-  <h2>Calendario</h2>
+  <h3>Seleccione un Rango De Fechas</h3>
 
-  
+
   <div class="row">
     <div class="col px-3 bg-dark ">
       <div class="text-warning d-flex justify-content-center align-items-center py-3 border-bottom border-warning">
@@ -39,11 +39,11 @@
         <tbody></tbody>
       </table>
     </div>
-    <div class="col ps-0 days-selected d-flex justify-content-center align-items-center">
+    <div class="col ps-2 days-selected d-flex justify-content-center align-items-center">
       <div class="">
         <div class="row start-day">
           <div class="tittle">
-            <h2>Fecha Desde:</h2>
+            <h2 class="calendar-date-title">Fecha Desde:</h2>
           </div>
           <div class="date-data mb-2">
             <h3 id="s-day" class="mb-0">**</h3>
@@ -54,7 +54,7 @@
         </div>
         <div class="row end-day">
           <div class="tittle">
-            <h2>Fecha Hasta:</h2>
+            <h2 class="calendar-date-title">Fecha Hasta:</h2>
           </div>
           <div class="date-data mb-2">
             <h3 id="e-day" class="mb-0">**</h3>

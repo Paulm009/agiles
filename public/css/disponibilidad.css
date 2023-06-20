@@ -30,3 +30,7 @@ table {
   #calendarTable th, td{
      border: 0 !important;
   }
+  .calendar-date-title{
+    font-size: 25px;
+    font-weight: bold;
+  }
