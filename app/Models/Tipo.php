@@ -11,7 +11,7 @@ class Tipo extends Model
     use HasFactory;
     protected $table = "tipo";
     protected $primaryKey = 'idTipo';
-    protected $fillable = ["idTipo","tipoHabitacion"];
+    protected $fillable = ["idTipo","tipoHabitacion","capacidad"];
     public $timestamps = true;
     public function habitaciones() {
     	return $this->hasMany('App\Models\Habitacion','idtipo','idTipo');

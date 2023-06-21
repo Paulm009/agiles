@@ -2,7 +2,8 @@
 <html>
 <head>
   <title>Lista de Tipos de Habitaciones</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
+  {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"> --}}
   <style>
     .table-actions .btn {
       margin-right: 5px;
@@ -27,16 +28,19 @@
     </div>
     <table id="dataTable" class="table table-striped">
       <thead>
-        <tr>
+        <tr class="text-center">
           <th>Tipo</th>
           <th>Capacidad</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Casa</td>
-          <td>5</td>
+        
+          @foreach($tiposH as $tipo)
+          <tr class="text-center">
+          <td>{{$tipo->tipoHabitacion}}</td>
+          <td>{{$tipo->capacidad}}</td>
+          <td id="{{$tipo->idTipo}}" class="d-none"></td>
           <td class="table-actions">
             <button class="btn btn-sm btn-primary editBtn">Editar</button>
             <button class="btn btn-sm btn-danger deleteBtn">Eliminar</button>
@@ -44,90 +48,37 @@
             <button class="btn btn-sm btn-secondary cancelBtn d-none">Cancelar</button>
           </td>
         </tr>
-        <tr>
-          <td>Apartamento</td>
-          <td>3</td>
-          <td class="table-actions">
-            <button class="btn btn-sm btn-primary editBtn">Editar</button>
-            <button class="btn btn-sm btn-danger deleteBtn">Eliminar</button>
-            <button class="btn btn-sm btn-success saveBtn d-none">Guardar</button>
-            <button class="btn btn-sm btn-secondary cancelBtn d-none">Cancelar</button>
-          </td>
-        </tr>
+        @endforeach
         <!-- Agrega más filas aquí -->
       </tbody>
     </table>
-    <div id="paginationContainer" class="d-flex justify-content-center"></div>
+    <div class="pagination">
+      {{ $tiposH->appends(['sort' => 'idTipo'])->render() }}
+    </div>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+</script>
   <script>
+    var headers = {
+    		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		};
     $(document).ready(function() {
       var rowsPerPage = 5;
       var totalRows = $('#dataTable tbody tr').length;
       var numPages = Math.ceil(totalRows / rowsPerPage);
       var currentPage = 1;
 
-      function showPage(page) {
-        var start = (page - 1) * rowsPerPage;
-        var end = start + rowsPerPage;
-
-        $('#dataTable tbody tr').hide().slice(start, end).show();
-        currentPage = page;
-      }
-
-      function renderPagination() {
-        $('#paginationContainer').empty();
-
-        var pagination = '<nav aria-label="Page navigation">' +
-          '<ul class="pagination">' +
-          '<li class="page-item ' + (currentPage === 1 ? 'disabled' : '') + '">' +
-          '<a class="page-link" href="#" data-page="prev">&laquo;</a>' +
-          '</li>';
-
-        for (var i = 1; i <= numPages; i++) {
-          pagination += '<li class="page-item ' + (i === currentPage ? 'active' : '') + '">' +
-            '<a class="page-link" href="#" data-page="' + i + '">' + i + '</a>' +
-            '</li>';
-        }
-
-        pagination += '<li class="page-item ' + (currentPage === numPages ? 'disabled' : '') + '">' +
-          '<a class="page-link" href="#" data-page="next">&raquo;</a>' +
-          '</li>' +
-          '</ul>' +
-          '</nav>';
-
-        $('#paginationContainer').html(pagination);
-      }
-
-      showPage(1);
-      renderPagination();
-
-      $(document).on('click', '.page-link', function(e) {
-        e.preventDefault();
-
-        var page = $(this).data('page');
-
-        if (page === 'prev') {
-          showPage(currentPage - 1);
-        } else if (page === 'next') {
-          showPage(currentPage + 1);
-        } else {
-          showPage(page);
-        }
-
-        renderPagination();
-      });
-
       // Editar fila
       $(document).on('click', '.editBtn', function() {
         var row = $(this).closest('tr');
         var type = row.find('td:eq(0)').text();
         var capacity = row.find('td:eq(1)').text();
-
-        row.find('td:eq(0)').html('<input type="text" class="form-control" value="' + type + '">');
-        row.find('td:eq(1)').html('<input type="text" class="form-control" value="' + capacity + '">');
+        row.find('td:eq(0)').html('<input name="nombeTipo" type="text" class="form-control" value="' + type + '">');
+        row.find('td:eq(1)').html('<input name="capacidad" type="text" class="form-control" value="' + capacity + '">');
         row.find('.editBtn').addClass('d-none');
         row.find('.deleteBtn').addClass('d-none');
         row.find('.saveBtn').removeClass('d-none');
@@ -139,13 +90,35 @@
         var row = $(this).closest('tr');
         var type = row.find('input:eq(0)').val();
         var capacity = row.find('input:eq(1)').val();
-
-        row.find('td:eq(0)').text(type);
-        row.find('td:eq(1)').text(capacity);
-        row.find('.editBtn').removeClass('d-none');
-        row.find('.deleteBtn').removeClass('d-none');
-        row.find('.saveBtn').addClass('d-none');
-        row.find('.cancelBtn').addClass('d-none');
+        var idTipo = 0;
+        $.ajax({
+            url: "{{route('tipo.guardar')}}",
+            type: 'POST',
+            headers: headers,
+            data: {
+                tipoHabitacion: type,
+                capacidad: capacity,
+                idTipo: row.find('td:eq(2)').attr('id')
+            },
+            dataType: 'json',
+            success: function(response) {
+                
+              console.log(response.idTipo);
+              idTipo = response.idTipo;
+              row.find('td:eq(0)').text(type);
+              row.find('td:eq(1)').text(capacity);
+              row.find('td:eq(2)').attr('id', idTipo);
+              row.find('td:eq(2)').addClass('d-none');
+              row.find('.editBtn').removeClass('d-none');
+              row.find('.deleteBtn').removeClass('d-none');
+              row.find('.saveBtn').addClass('d-none');
+              row.find('.cancelBtn').addClass('d-none');
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        });
+        
       });
 
       // Cancelar edición de fila
@@ -177,24 +150,42 @@
           cancelButtonText: 'Cancelar'
         }).then((result) => {
           if (result.isConfirmed) {
-            row.remove();
+            $.ajax({
+            url: "{{route('tipo.eliminar')}}",
+            type: 'POST',
+            headers: headers,
+            data: {
+                idTipo: row.find('td:eq(2)').attr('id')
+            },
+            dataType: 'json',
+            success: function(response) {
+                
+              console.log(response);
+              row.remove();
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        });
+            
           }
         });
       });
 
       // Agregar fila
       $('#addRowBtn').on('click', function() {
-        var newRow = '<tr>' +
-          '<td><input type="text" class="form-control"></td>' +
-          '<td><input type="text" class="form-control"></td>' +
+        var newRow = '<tr class="text-center">' +
+          '<td><input name="nombeTipo" type="text" class="form-control"></td>' +
+          '<td><input name="capacidad" type="text" class="form-control"></td>' +
+          '<td class="d-none"><input name="capacidad" type="text" class="form-control"></td>' +
           '<td class="table-actions">' +
-          '<button class="btn btn-sm btn-primary editBtn">Editar</button>' +
-          '<button class="btn btn-sm btn-danger deleteBtn">Eliminar</button>' +
-          '<button class="btn btn-sm btn-success saveBtn d-none">Guardar</button>' +
-          '<button class="btn btn-sm btn-secondary cancelBtn d-none">Cancelar</button>' +
+          '<button class="btn btn-sm btn-primary editBtn d-none">Editar</button>' +
+          '<button class="btn btn-sm btn-danger deleteBtn d-none">Eliminar</button>' +
+          '<button class="btn btn-sm btn-success saveBtn ">Guardar</button>' +
+          '<button class="btn btn-sm btn-secondary cancelBtn ">Cancelar</button>' +
           '</td>' +
           '</tr>';
-
+            
         $('#dataTable tbody').append(newRow);
       });
 

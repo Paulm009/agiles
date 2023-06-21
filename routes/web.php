@@ -25,3 +25,5 @@ Route::get('/registro/huesped', [RegistroHuespedController::class,'index'])->nam
 Route::post('/registro/huesped', [RegistroHuespedController::class,'envio'])->name('registro.huesped.envio');
 Route::resource('/listaHabitacion', listarHabitacionesController::class);
 Route::resource('/listaTipoHabitacion', listaTipoHabitacionController::class);
+Route::post('/listaTipoHabitacion/guardar', [listaTipoHabitacionController::class,'store'])->name('tipo.guardar');
+Route::post('/listaTipoHabitacion/eliminar', [listaTipoHabitacionController::class,'destroy'])->name('tipo.eliminar');

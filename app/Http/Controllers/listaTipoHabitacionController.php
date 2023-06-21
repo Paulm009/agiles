@@ -14,16 +14,16 @@ class listaTipoHabitacionController extends Controller
     public function index()
     {
         $habitacion = Habitacion::with('tipo')->paginate(5);
-        return view ('listaTipoHabitacion')->with('Tipo', $habitacion);
-        //return view('formularioReserva',compact('habitacion'));
+        $tipos = Tipo::paginate(5);
+        return view ('listaTipoHabitacion')->with('tiposH', $tipos);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function save()
     {
-        $tipos= Tipo::all();
+        return request();
         return view('habitaciones.create',compact('tipos'));
     }
 
@@ -32,23 +32,14 @@ class listaTipoHabitacionController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'idTipo' => 'required',
-            'nombreHabitacion' => 'required|min:10|string',
-            'precio' => 'required|numeric|min:1',
-            'capacidad' => 'required|numeric|min:1',
-            'precioDescuento' => 'required|numeric|min:1',
-            'descripcion' => 'required|string|min:4'
-        ], [
-            'idTipo.required' => 'idTipo field is required.',
-            'nombreHabitacion.required' => 'nombreHabitacion field is required.',
-            'precio.required' => 'precio field is required.',
-            'capacidad.required' => 'capacidad field is required.',
-            'precioDescuento.required' => 'precioDescuento field is required.',
-            'descripcion.required' => 'descripcion field is required.',
-        ]);
-        $habitacion = Habitacion::create($validatedData);          
-        return redirect('listaHabitacion')->with('success', 'Habitacion creada exitosamente.');
+        if($request->idTipo){
+            $tipo = Tipo::find($request->idTipo);
+            $tipo->update($request->all());
+        }else{
+            $tipo = Tipo::create($request->all());
+        }
+        
+        return response()->json(['idTipo'=>$tipo->idTipo]);
     }
 
     /**
@@ -72,40 +63,20 @@ class listaTipoHabitacionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        $validatedData = $request->validate([
-            'idTipo' => 'required',
-            'nombreHabitacion' => 'required|min:10|string',
-            'precio' => 'required|numeric|min:1',
-            'capacidad' => 'required|numeric|min:1',
-            'precioDescuento' => 'required|numeric|min:1',
-            'descripcion' => 'required|string|min:4'
-        ], [
-            'idTipo.required' => 'idTipo field is required.',
-            'nombreHabitacion.required' => 'nombreHabitacion field is required.',
-            'precio.required' => 'precio field is required.',
-            'capacidad.required' => 'capacidad field is required.',
-            'precioDescuento.required' => 'precioDescuento field is required.',
-            'descripcion.required' => 'descripcion field is required.',
-        ]);
-        $habitacion = Habitacion::find($id);
-        $habitacion->update($validatedData);       
-        return redirect('listaHabitacion')->with('success', 'Habitacion editada exitosamente.');
+            
+        return "update";
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        $habitacion = Habitacion::find($id);
-        if ($habitacion) {
-            $habitacion->delete();       
-            return redirect('listaHabitacion')->with('success', 'Habitacion eliminada exitosamente.');
-        }else{
-            return back()->withInput()->with('error',  'Habitacion delete failed.');
-        }
+        $tipo = Tipo::find($request ->idTipo);
+        $tipo->delete();
+        return response()->json(['success'=>"deleted successfully"]);
     }
 }
 
