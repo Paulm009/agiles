@@ -8,10 +8,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/')}}">Inicio</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item">
                     {{-- /listaTipoHabitacion --}}
-                    <a class="nav-link dropdown-toggle" href="{{url('/listaHabitacion')}}" id="dropdownTiposHabitacion" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">Tipos de Habitación</a>
+                    <a class="nav-link" href="{{url('/listaTipoHabitacion')}}">
+                        Tipos de Habitación
+                    </a>
                     <!--ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownTiposHabitacion">
                         <li><a class="dropdown-item" href="#">Habitaciones simples</a></li>
                         <li><a class="dropdown-item" href="#">Habitaciones dobles</a></li>
