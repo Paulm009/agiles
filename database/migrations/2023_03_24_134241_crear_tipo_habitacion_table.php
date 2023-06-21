@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipo', function (Blueprint $table) {
-            $table->id("idTipo");
-            $table->String("tipoHabitacion",50);
+        Schema::create('tipoHabitacion', function (Blueprint $table) {
+            $table->bigInteger("idTipoHabitacion");
+            $table->bigInteger("tipo");
+            $table->Integer("cantidad");
             $table->timestamps();
         });
     }
