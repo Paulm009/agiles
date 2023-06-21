@@ -16,7 +16,7 @@
             <form action="{{ route('habitacionesDisponibles.index') }}" method="GET">
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label for="filtro">Filtrar por tipo:</label>
+                        <label for="filtro">Filtrar por:</label>
 
                         <select name="filtro" id="filtro" class="form-control mt-2">
                             <option value="">Todos</option>
