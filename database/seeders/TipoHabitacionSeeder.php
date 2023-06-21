@@ -13,7 +13,7 @@ class TipoHabitacionSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table("tipo")->insert([
+        /**DB::table("tipo")->insert([
             'idTipo'=>'1',
             'tipoHabitacion'=>'Simple',
             'created_at'=>now()
@@ -27,6 +27,6 @@ class TipoHabitacionSeeder extends Seeder
             'idTipo'=>'3',
             'tipoHabitacion'=>'Triple',
             'created_at'=>now()
-        ]);
+        ]);**/
     }
 }

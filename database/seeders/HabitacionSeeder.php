@@ -13,7 +13,7 @@ class HabitacionSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table("habitacion")->insert([
+        /**DB::table("habitacion")->insert([
             'idTipo'=>'1',
             'nombreHabitacion'=>'Alfombra Beni Ourain',
             'capacidad' => '1',
@@ -97,6 +97,6 @@ class HabitacionSeeder extends Seeder
             'descripcion'=>'Triple',
             'precioDescuento'=>'0',
             'created_at'=>now()
-        ]);
+        ]);**/
     }
 }
