@@ -33,15 +33,16 @@
                     <a class="nav-link" href="{{url('/')}}">Inicio</a>
                 </li>
                 <li class="nav-item dropdown">
+                    {{-- /listaTipoHabitacion --}}
                     <a class="nav-link dropdown-toggle" href="{{url('/listaHabitacion')}}" id="dropdownTiposHabitacion" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">Tipos de Habitación</a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownTiposHabitacion">
+                    <!--ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownTiposHabitacion">
                         <li><a class="dropdown-item" href="#">Habitaciones simples</a></li>
                         <li><a class="dropdown-item" href="#">Habitaciones dobles</a></li>
                         <li><a class="dropdown-item" href="#">Habitaciones triples</a></li>
                         <li><a class="dropdown-item" href="#">Habitaciones familiares</a></li>
                         <li><a class="dropdown-item" href="#">Cabañas</a></li>
-                    </ul>
+                    </ul-->
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="{{url('/reserva')}}" id="dropdownReservas" role="button"
