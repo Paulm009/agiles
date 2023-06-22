@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReservaHabitacionController;
 use App\Http\Controllers\RegistroHuespedController;
 use App\Http\Controllers\listarHabitacionesController;
+use App\Http\Controllers\DisponibilidadController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +24,4 @@ Route::post('/reserva', [ReservaHabitacionController::class,'filtrar'])->name('r
 Route::get('/registro/huesped', [RegistroHuespedController::class,'index'])->name('registro.huesped');
 Route::post('/registro/huesped', [RegistroHuespedController::class,'envio'])->name('registro.huesped.envio');
 Route::resource('/listaHabitacion', listarHabitacionesController::class);
-
-Route::get('/calendar',function () {
-    return view('disponibilidad.disponibilidad');
-});
+Route::get('/disponibilidad',[DisponibilidadController::class,'index'])->name('disponibilidad');

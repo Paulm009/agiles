@@ -15,7 +15,7 @@
       <div class="col">
         @include('disponibilidad.calendario')
       </div>
-      <div class="col-3 bg-warning p-2 text-dark bg-opacity-50">
+      <div class="col-3  p-2 text-dark bg-opacity-50">
         @include('disponibilidad.tipos')
       </div>
       <div class="d-grid gap-2 col-6 my-4 mx-auto">

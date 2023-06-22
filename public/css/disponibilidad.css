@@ -1,3 +1,59 @@
+
+/* Tipo */
+.check-element {
+  height: 400px; /* Establece una altura máxima para el contenedor */
+}
+
+.checkbox-1 .custom-control-input:checked~.custom-control-label::before {
+  background-color: #ff9999 !important;
+  border-color: #ff9999 !important;
+}
+
+.checkbox-2 .custom-control-input:checked~.custom-control-label::before {
+  background-color: #99ff99 !important;
+  border-color: #99ff99 !important;
+}
+
+.checkbox-3 .custom-control-input:checked~.custom-control-label::before {
+  background-color: #9999ff !important;
+  border-color: #9999ff !important;
+}
+
+.checkbox-4 .custom-control-input:checked~.custom-control-label::before {
+  background-color: #ffff99 !important;
+  border-color: #ffff99 !important;
+}
+
+.checkbox-5 .custom-control-input:checked~.custom-control-label::before {
+  background-color: #ffcc99 !important;
+  border-color: #ffcc99 !important;
+}
+
+.checkbox-6 .custom-control-input:checked~.custom-control-label::before {
+  background-color: #cc99ff !important;
+  border-color: #cc99ff !important;
+}
+
+.checkbox-7 .custom-control-input:checked~.custom-control-label::before {
+  background-color: #99ffff !important;
+  border-color: #99ffff !important;
+}
+
+.checkbox-8 .custom-control-input:checked~.custom-control-label::before {
+  background-color: #ff99cc !important;
+  border-color: #ff99cc !important;
+}
+
+.checkbox-9 .custom-control-input:checked~.custom-control-label::before {
+  background-color: #ccff99 !important;
+  border-color: #ccff99 !important;
+}
+
+.checkbox-10 .custom-control-input:checked~.custom-control-label::before {
+  background-color: #33cccc !important;
+  border-color: #33cccc !important;
+}
+
 table {
     border-collapse: collapse;
   }
@@ -7,6 +63,7 @@ table {
     cursor: pointer;
     text-align: center;
   }
+  /* Calendar */
   .block-day {
     background-color: #27272a !important;
     color: #474747;
