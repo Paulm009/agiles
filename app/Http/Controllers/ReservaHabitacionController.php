@@ -5,6 +5,7 @@ use App\Models\Habitacion;
 use App\Models\Tipo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Pluralizer;
 
 class ReservaHabitacionController extends Controller
 {
@@ -16,9 +17,14 @@ class ReservaHabitacionController extends Controller
 
     public function seleccionarFecha(Request $request)
     {
-        $fechaIngreso = $request->input('fechaIngreso');
-        $fechaSalida = $request->input('fechaSalida');
+        Pluralizer::useLanguage('spanish');
+        $request->validate([
+            'fechaIngreso' => 'required',
+            'fechaSalida' => 'required',
+        ]);
+        
         $tipoHabitacion = $request->input('tipoHabitacion');
+        
         
         $habitacionesDisponibles = Habitacion::whereNotIn('idHabitacion', function ($query) {
             $query->select('idHabitacion')
