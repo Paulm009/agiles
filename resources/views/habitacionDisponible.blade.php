@@ -10,7 +10,7 @@
     @section('content')
         <div class="container p-2">
             <div class="hero">
-                <h1 class="title text-center mt-4 mb-5"> <strong>Lista de Habitaciones <br> Disponibles </strong></h1>
+                <h1 class="title text-center mt-4 mb-5"> Lista de Habitaciones <br> Disponibles </h1>
             </div>
 
             <div class="row mt-4">
