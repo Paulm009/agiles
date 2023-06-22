@@ -13,20 +13,29 @@ class TipoHabitacionSeeder extends Seeder
      */
     public function run(): void
     {
-        /**DB::table("tipo")->insert([
+        DB::table("tipoHabitacion")->insert([
             'idTipo'=>'1',
-            'tipoHabitacion'=>'Simple',
+            'tipo'=>'Simple',
+            'capacidad'=>'1',
             'created_at'=>now()
         ]);
-        DB::table("tipo")->insert([
+        DB::table("tipoHabitacion")->insert([
             'idTipo'=>'2',
-            'tipoHabitacion'=>'Doble',
+            'tipo'=>'Doble',
+            'capacidad'=>'2',
             'created_at'=>now()
         ]);
-        DB::table("tipo")->insert([
+        DB::table("tipoHabitacion")->insert([
             'idTipo'=>'3',
-            'tipoHabitacion'=>'Triple',
+            'tipo'=>'Triple',
+            'capacidad'=>'4',
             'created_at'=>now()
-        ]);**/
+        ]);
+        DB::table("tipoHabitacion")->insert([
+            'idTipo'=>'4',
+            'tipo'=>'King',
+            'capacidad'=>'4',
+            'created_at'=>now()
+        ]);
     }
 }
