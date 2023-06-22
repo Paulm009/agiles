@@ -33,10 +33,14 @@ class ReservaHabitacionController extends Controller
                 });
         });
 
-        if ($tipoHabitacion) {
-            $habitacionesDisponibles->where('idTipo', $tipoHabitacion);
+        if ($tipoHabitacion == "Simple") {
+            $habitacionesDisponibles->where('idTipo', 1);
+        }else if ($tipoHabitacion == "Doble") {
+            $habitacionesDisponibles->where('idTipo', 2);
+        }else if ($tipoHabitacion == "Triple") {
+            $habitacionesDisponibles->where('idTipo', 3);
         }
-
+        
         $habitacionesDisponibles = $habitacionesDisponibles->get();
         
         return view('habitacionDisponible',compact('habitacionesDisponibles'));

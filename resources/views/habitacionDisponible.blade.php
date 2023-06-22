@@ -10,7 +10,7 @@
     @section('content')
         <div class="container p-2">
             <div class="hero">
-                <h1 class="title text-center mt-4 mb-4"> <strong>Lista de Habitaciones <br> Disponibles </strong></h1>
+                <h1 class="title text-center mt-4 mb-5"> <strong>Lista de Habitaciones <br> Disponibles </strong></h1>
             </div>
 
             <div class="row mt-4">
@@ -29,8 +29,10 @@
                                     <p class="card-text ">{{$habitaciones->descripcion}}</p>
 
                                     <p class="text-center card-text"><small class="text-body-secondary">Precio: {{$habitaciones->precio}}</small></p>
+                                    
+                                    <p class="text-center card-text"><small class="text-body-secondary">Tipo de habitación: {{$habitaciones->tipoHabitacion->tipo}}</small></p>
 
-                                    <a type="button" href="" class="btn w-100 btn-warning">Reservar</a>
+                                    <a type="button" href="" class="btn w-100 btn-warning mt-2">Reservar</a>
                                 </div>
                             </div>
                         </div>

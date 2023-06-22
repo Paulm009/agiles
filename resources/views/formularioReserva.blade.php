@@ -37,7 +37,6 @@
                 
                 <div class="col-md-6 mt-3">
                   <label for="cantidadDeHuespedes" class="form-label text-light">Tipo de habitación:</label>
-                  {{-- <input name="cantidadDeHuespedes" type="text" class="form-control" id="cantidadDeHuespedes" value="{{old('cantidadDeHuespedes')}}" > --}}
                   <select name="tipoHabitacion" id="tipoHabitacion" class="form-control">
                       <option value="">Todos</option>
 
