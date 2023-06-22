@@ -11,12 +11,14 @@
 <div class="check-list rowd-flex align-content-center">
     <h3>Tipos de Habitacion</h3>
     <div class="check-element row overflow-auto">
+        @foreach($tipos as $tipo)
         <div class="col-6">
-            <div class="checkbox-1 custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="checkbox1" name="checkbox1">
-                <label class="custom-control-label" for="checkbox1">Opción 1</label>
-              </div>
+            <div class="checkbox-1 custom-control custom-checkbox border border-secondary-subtle">
+                <input type="checkbox" class="custom-control-input" id="checkbox{{$tipo->idTipo}}" name="tipo[]" value="{{$tipo->idTipo}}">
+                <label class="custom-control-label" for="checkbox{{$tipo->idTipo}}">{{$tipo->tipo}}</label>
+            </div>
         </div>
+        @endforeach
         
         
     </div>

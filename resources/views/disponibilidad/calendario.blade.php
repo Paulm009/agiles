@@ -50,6 +50,7 @@
             <p id="s-day-week" class="mb-0">*****</p>
             <p id="s-month-year" class="mb-0">**********</p>
           </div>
+          <input type="text" class="d-none" id="fechaInicio" name="fechaInicio">
           
         </div>
         <div class="row end-day">
@@ -61,6 +62,7 @@
             <p id="e-day-week" class="mb-0">*****</p>
             <p id="e-month-year" class="mb-0">**********</p>
           </div>
+          <input type="text" class="d-none" id="fechaFin" name="fechaFin">
         </div>
       </div>
     </div>
@@ -219,7 +221,9 @@
         month = selectedStartDate.month;
         year = selectedStartDate.year;
         dateSelected = new Date(year,month,day);
-        //replace on html.. Fecha Desde
+        //replace on html.. Fecha Desde and fechaInicio
+        var fechaInicio = document.getElementById("fechaInicio");
+        fechaInicio.value = dateSelected.toISOString().slice(0,10);
         daySelected = document.getElementById("s-day");
         daySelected.innerHTML = day;
         dayWeekSelected = document.getElementById("s-day-week");
@@ -233,7 +237,9 @@
         month = selectedEndDate.month;
         year = selectedEndDate.year;
         dateSelected = new Date(year,month,day);
-        //replace on html.. Fecha Hasta
+        //replace on html.. Fecha Hasta and fechaFin
+        var fechaFin = document.getElementById("fechaFin");
+        fechaFin.value = dateSelected.toISOString().slice(0,10);
         daySelected = document.getElementById("e-day");
         daySelected.innerHTML = day;
         dayWeekSelected = document.getElementById("e-day-week");

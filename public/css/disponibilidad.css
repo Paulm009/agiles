@@ -1,7 +1,7 @@
 
 /* Tipo */
 .check-element {
-  height: 400px; /* Establece una altura máxima para el contenedor */
+  height: 360px; /* Establece una altura máxima para el contenedor */
 }
 
 .checkbox-1 .custom-control-input:checked~.custom-control-label::before {
