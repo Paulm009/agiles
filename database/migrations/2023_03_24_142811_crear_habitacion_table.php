@@ -16,11 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger("idTipo");
             $table->String("nombreHabitacion",50);
             $table->integer("precio");
-            $table->integer("capacidad");
-            $table->integer("precioDescuento");
             $table->text("descripcion");
+            $table->boolean('estado')->default(true); 
             $table->timestamps();
-            $table->foreign("idTipo")->references("idTipo")->on('tipo');
+            $table->foreign("idTipo")->references("idTipo")->on('tipoHabitacion');
         });
     }
 
