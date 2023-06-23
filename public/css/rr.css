@@ -1,0 +1,38 @@
+.content {
+    width: 130%;
+}
+
+.title {
+    font-size: 40px;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-top: 10px;   
+    padding-bottom: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    color: aliceblue;
+}
+
+.left {
+    padding-left: 0px;
+   
+    margin-left: 0px;
+    float: left;
+    position: relative;
+    width: 45%;
+    border: 2px;
+    background-color: #1b3039;
+
+    
+}
+
+.right {
+   
+    padding-left: 0px;
+    margin-left: 30px;
+    position: relative;
+    float: left;
+    background-color: #1b3039;
+    width: 45%;
+  
+}

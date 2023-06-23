@@ -49,7 +49,7 @@
 
                                     <p class="text-center card-text"><small class="text-body-secondary">Precio: {{$habitaciones->precio}}</small></p>
 
-                                    <a type="button" href="" class="btn w-100 btn-warning">Reservar</a>
+                                    <a type="button"  href="{{url('/registro/huesped')}}" class="btn w-100 btn-warning">Reservar</a>
                                 </div>
                             </div>
                         </div>
