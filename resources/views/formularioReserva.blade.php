@@ -40,11 +40,10 @@
                   <select name="tipoHabitacion" id="tipoHabitacion" class="form-control">
                       <option value="">Todos</option>
 
-                      <option value="Simple">Simple</option>
+                      @foreach ($tiposHabitacion as $tipo)
+                          <option value="{{ $tipo->idTipo }}">{{ $tipo->tipo }}</option>
+                      @endforeach
 
-                      <option value="Doble">Doble</option>
-
-                      <option value="Triple">Triple</option>
                   </select>
                 </div>
               </div>

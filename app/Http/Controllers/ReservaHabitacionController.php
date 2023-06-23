@@ -27,7 +27,6 @@ class ReservaHabitacionController extends Controller
         
         $tipoHabitacion = $request->input('tipoHabitacion');
         
-        
         $habitacionesDisponibles = Habitacion::whereNotIn('idHabitacion', function ($query) {
             $query->select('idHabitacion')
                 ->from('reserva')
@@ -41,12 +40,8 @@ class ReservaHabitacionController extends Controller
                 });
         });
 
-        if ($tipoHabitacion == "Simple") {
-            $habitacionesDisponibles->where('idTipo', 1);
-        }else if ($tipoHabitacion == "Doble") {
-            $habitacionesDisponibles->where('idTipo', 2);
-        }else if ($tipoHabitacion == "Triple") {
-            $habitacionesDisponibles->where('idTipo', 3);
+        if ($tipoHabitacion) {
+            $habitacionesDisponibles->where('idTipo', $tipoHabitacion);
         }
         
         $habitacionesDisponibles = $habitacionesDisponibles->get();
