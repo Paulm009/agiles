@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('reserva', function (Blueprint $table) {
             $table->bigIncrements("idReserva");
+            $table->unsignedBigInteger("idCliente");
             $table->dateTime("fechaReserva");
             $table->dateTime("fechaInicio");
             $table->dateTime("fechaFin");
             $table->integer("monto");
             $table->integer("cantidad");
             $table->timestamps();
+            $table->foreign("idCliente")->references("idCliente")->on('clientes');
+
         });
         
     }

@@ -24,31 +24,35 @@
     </div>
     
   </form>
-  <div class="section-diponibles">
-    @if(isset($tiposHabiTotal))
+  <div class="section-diponibles d-wrap">
+    @if(isset($tiposDeHabitaciones))
+    @php
+        $length = count($tiposHabiTotal);
+    @endphp
     <div class="row">
-      <div class="col">
-        <div class=" list-group-item card card-animation my-3 mx-2 shadow" >
-          <div class="row g-0">
-            <div class="col-md-5 d-flex align-items-center">
-              <img src="{{URL::asset('img/bed.jpg' )}}" class="img-fluid rounded-start" alt="simple">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">{{"Tipo de habitacion Simple"}}</h5><div class="row">
-    
-                  <p class="card-text text-lg text-muted"> Cantidad: <strong class="">10</strong> Disponibles</p>
+      @for($i = 0; $i < $length; $i++)
+      {{-- @foreach($tiposDeHabitaciones as $tipo) --}}
+      
+        <div class="col-6">
+          <div class=" list-group-item card card-animation my-3 mx-2 shadow-lg border" >
+            <div class="row g-0">
+              <div class="col-md-5 d-flex align-items-center">
+                <img src="{{URL::asset('img/bed.jpg' )}}" class="img-fluid rounded-start" alt="simple">
+              </div>
+              <div class="col-md-7">
+                <div class="card-body">
+                  <h5 class="card-title">Tipo de habitacion {{$tiposDeHabitaciones[$i]->tipoHabitacion}}</h5><div class="row">
+      
+                    <p class="card-text text-lg text-muted"> Cantidad Disponible: <strong class="">{{$tiposHabiTotal[$i]->cantidad}}</strong> Disponibles</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col">
-
-      </div>
-    </div>
-    
+      
+      @endfor
+  </div>
     @endif
   </div>
 </div>

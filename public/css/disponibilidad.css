@@ -2,6 +2,7 @@
 .card {
   /* Estilos de la tarjeta */
   /* ... */
+  /* background-color: rgba(220, 142, 40, 0.258) !important; */
   transition: transform 0.3s; /* Transición de animación */
 }
 
