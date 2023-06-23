@@ -3,6 +3,7 @@
     <header class="header">
       <title>Reserva</title>
     </header>
+
     @extends('layout')
     @section('content')
 
@@ -28,7 +29,7 @@
 
                 <div class="col-md-6">
                     <label for="fechaSalida" class="form-label text-light">Fecha de salida:</label>
-                    <input name="fechaSalida" type="date" class="form-control" id="fechaSalida" value="{{old('fechaSalida')}}">
+                    <input id="fechaSalida" name="fechaSalida" type="date" class="form-control"  value="{{old('fechaSalida')}}">
                     @error('fechaSalida')
                         <p class="text-warning">{{ $message }}</p>
                     @enderror
@@ -36,8 +37,7 @@
                 
                 <div class="col-md-6 mt-3">
                   <label for="cantidadDeHuespedes" class="form-label text-light">Tipo de habitación:</label>
-                  {{-- <input name="cantidadDeHuespedes" type="text" class="form-control" id="cantidadDeHuespedes" value="{{old('cantidadDeHuespedes')}}" > --}}
-                  <select name="filtro" id="filtro" class="form-control">
+                  <select name="tipoHabitacion" id="tipoHabitacion" class="form-control">
                       <option value="">Todos</option>
 
                       <option value="Simple">Simple</option>
@@ -62,6 +62,5 @@
           </div>
       </section>
     </div>
-
     @endsection
 </html>

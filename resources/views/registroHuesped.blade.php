@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <header class="header">
-    <title>Create Habitaciones</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-    <link href="/css/formhuesped.css" rel="stylesheet">
+  <link href="/css/formhuesped.css" rel="stylesheet">
+
+    <title>Home</title>
 </header>
 
 @extends('layout')
@@ -62,69 +61,34 @@
                           @enderror
                       </div>
       
-                      <div class="col-md-5 ">
-                          <label for="fechaSalida" class="form-label text-light">Fecha de salida:</label>
-                          <input name="fechaSalida" type="date" class="form-control" id="fechaSalida" value="{{old('fechaSalida')}}">
-                          @error('fechaSalida')
-                              <p class="text-warning">{{ $message }}</p>
-                          @enderror
-                      </div>
-                            <div class="col-auto mb-2 ">
-                                <label class="mr-1">Nombre</label>
-                                <div class="input-group">
-                                    <input value="{{old('nombre')}}" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" id="nombre">
-                                </div>
-                                @if ($errors->has('nombre'))
-                                <span class="text-danger">{{ $errors->first('nombre') }}</span>
-                                @endif
-                            </div>
-                            <div class="col-auto mb-2">
-                                <label class="mr-1">Apellidos</label>
-                                <div class="input-group">
-                                    <input value="{{old('apellidos')}}" type="text" class="form-control @error('apellidos') is-invalid @enderror" name="apellidos" id="apellidos">
+  </section>
+<section class="form-registro mx-2 row">
+  <div class="col-0"></div>
+  <div class="col">
+    <form class="g-3 bg-dark" action="{{route('registro.huesped.envio')}}" method="POST" enctype="multipart/form-data" novalidate>
+      @csrf
+      <hr>
+      <div class="col-md-12">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+      </div>
+      <div class="col-md-12">
 
-                                </div>
-                                @if ($errors->has('apellidos'))
-                                <span class="text-danger">{{ $errors->first('apellidos') }}</span>
-                                @endif
-                            </div>
-
-                            <div class="col-auto mb-2">
-                              <label class="mr-1">Correo Electrónico</label>
-                              <div class="input-group">
-                                  <input value="{{old('correo')}}" type="text" class="form-control @error('correo') is-invalid @enderror" name="correo" id="correo">
-
-                              </div>
-                              @if ($errors->has('correo'))
-                              <span class="text-danger">{{ $errors->first('correo') }}</span>
-                              @endif
-                          </div>
-                            <div class="col-auto mb-2">
-                                <label class="mr-1">Teléfono</label>
-                                <div class="input-group">
-                                    <input value="{{old('telefono')}}" type="number" class="form-control @error('telefono') is-invalid @enderror" name="telefono" id="telefono">
-
-                                </div>
-                                @if ($errors->has('telefono'))
-                                <span class="text-danger">{{ $errors->first('telefono') }}</span>
-                                @endif
-                            </div>
-                            
-                              
-                            <button type="submit"  href="{{url('/detallesReserva')}}"class="btn w-100 btn-warning">Guardar</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            </section>
-        </div>
-        <div class="col-md-12 mb-2">
-            <div style="text-align:right">
-                <a type="button" href="{{route('home')}}" class="btn btn-danger text-center btnSalir">Salir</a>
-            </div>
-        </div>
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" id="apellidos" name="apellidos" required>
+        
+      </div>
+      <div class="col-md-12">
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="col-md-12">
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" required>
+      </div>
+      <div class="col-md-6 text-center pb-3">
+        <button type="submit" class="btn w-100 btn-warning">Enviar</button>
     </div>
+</section>
 </div>
 @endsection
-
-</html>
