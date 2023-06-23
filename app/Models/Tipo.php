@@ -9,11 +9,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Tipo extends Model
 {
     use HasFactory;
-    protected $table = "tipo";
+    protected $table = "tipohabitacion";
     protected $primaryKey = 'idTipo';
     protected $fillable = ["idTipo","tipoHabitacion","capacidad"];
     public $timestamps = true;
     public function habitaciones() {
     	return $this->hasMany('App\Models\Habitacion','idtipo','idTipo');
     }
+
+    public function habitacionesReservadas(){
+        return $this->hasMany('App\Models\HabitacionReservada', 'idTipoHabitacion');
+    }
+
 }

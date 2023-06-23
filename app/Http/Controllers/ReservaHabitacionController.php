@@ -1,36 +1,32 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Pluralizer;
 use App\Models\Habitacion;
+use App\Models\Tipo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Pluralizer;
 
 class ReservaHabitacionController extends Controller
 {
-    public function index(Request $request)
+    public function mostrarFormulario()
     {
-        $habitaciones = [];
-        return view('formularioReserva',compact('habitaciones'));
+        $tiposHabitacion = Tipo::all();
+        return view('formularioReserva', compact('tiposHabitacion'));
     }
-    public function filtrar(Request $request)
+
+    public function seleccionarFecha(Request $request)
     {
         Pluralizer::useLanguage('spanish');
         $request->validate([
-            'fechaIngreso' => [
-                'required',
-                'date',
-                'after_or_equal:'.(now()->format('Y-m-d')), // Verifica que la fecha sea igual o posterior a la fecha actual
-            ],
-            'fechaSalida' => [
-                'required',
-                'date',
-                'after:'.(request()->input('fechaIngreso')), // Verifica que la fecha sea igual o posterior a la fecha actual
-            ],
-            'cantidadDeHuespedes' => ['required','integer'],
+            'fechaIngreso' => 'required',
+            'fechaSalida' => 'required',
         ]);
-        $habitaciones = Habitacion::whereNotIn('idHabitacion', function ($query) {
+        
+        $tipoHabitacion = $request->input('tipoHabitacion');
+        
+        
+        $habitacionesDisponibles = Habitacion::whereNotIn('idHabitacion', function ($query) {
             $query->select('idHabitacion')
                 ->from('reserva')
                 ->where(function ($query) {
@@ -41,10 +37,18 @@ class ReservaHabitacionController extends Controller
                     $query->where('fechaInicio', '<=', request()->input('fechaIngreso'))
                         ->where('fechaFin', '>=', request()->input('fechaSalida'));
                 });
-        })
-        ->orderBy('idHabitacion')
-        ->get();
-        // return $habitaciones;
-        return view('formularioReserva',compact('habitaciones'));
+        });
+
+        if ($tipoHabitacion == "Simple") {
+            $habitacionesDisponibles->where('idTipo', 1);
+        }else if ($tipoHabitacion == "Doble") {
+            $habitacionesDisponibles->where('idTipo', 2);
+        }else if ($tipoHabitacion == "Triple") {
+            $habitacionesDisponibles->where('idTipo', 3);
         }
+        
+        $habitacionesDisponibles = $habitacionesDisponibles->get();
+        
+        return view('habitacionDisponible',compact('habitacionesDisponibles'));
+    }
 }
