@@ -23,7 +23,7 @@
         <input type="text" id="searchInput" class="form-control" placeholder="Buscar...">
       </div>
       <div class="col-md-6 text-right">
-        <button id="addRowBtn" class="btn btn-primary">Agregar Tipo</button>
+        <button id="addRowBtn" class="btn btn-warning btn-primary">Agregar Tipo</button>
       </div>
     </div>
     <table id="dataTable" class="table table-striped">
@@ -42,10 +42,11 @@
           <td>{{$tipo->capacidad}}</td>
           <td id="{{$tipo->idTipo}}" class="d-none"></td>
           <td class="table-actions">
-            <button class="btn btn-sm btn-primary editBtn">Editar</button>
+            <button class="btn btn-sm btn-warning editBtn">Editar</button>
             <button class="btn btn-sm btn-danger deleteBtn">Eliminar</button>
             <button class="btn btn-sm btn-success saveBtn d-none">Guardar</button>
             <button class="btn btn-sm btn-secondary cancelBtn d-none">Cancelar</button>
+            <p class="text-danger d-none error-message">Nombre repetido</p>
           </td>
         </tr>
         @endforeach
@@ -113,8 +114,11 @@
               row.find('.deleteBtn').removeClass('d-none');
               row.find('.saveBtn').addClass('d-none');
               row.find('.cancelBtn').addClass('d-none');
+              row.find('.error-message').addClass('d-none'); // Ocultar mensaje de error
             },
             error: function(xhr, status, error) {
+                var errorMessage = xhr.responseJSON.error;
+                row.find('.error-message').text(errorMessage).removeClass('d-none'); // Mostrar mensaje de error
                 console.log(error);
             }
         });
@@ -133,6 +137,7 @@
         row.find('.deleteBtn').removeClass('d-none');
         row.find('.saveBtn').addClass('d-none');
         row.find('.cancelBtn').addClass('d-none');
+        row.find('.error-message').addClass('d-none'); // Ocultar mensaje de error
       });
 
       // Eliminar fila
@@ -177,13 +182,14 @@
         var newRow = '<tr class="text-center">' +
           '<td><input name="nombeTipo" type="text" class="form-control"></td>' +
           '<td><input name="capacidad" type="text" class="form-control"></td>' +
-          '<td class="d-none"><input name="capacidad" type="text" class="form-control"></td>' +
+          '<td class="d-none"></td>' +
           '<td class="table-actions">' +
           '<button class="btn btn-sm btn-primary editBtn d-none">Editar</button>' +
           '<button class="btn btn-sm btn-danger deleteBtn d-none">Eliminar</button>' +
           '<button class="btn btn-sm btn-success saveBtn ">Guardar</button>' +
           '<button class="btn btn-sm btn-secondary cancelBtn ">Cancelar</button>' +
           '</td>' +
+          '<td class="error-message text-danger" colspan="3"></td>' + // Mensaje de error
           '</tr>';
             
         $('#dataTable tbody').append(newRow);
