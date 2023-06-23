@@ -25,3 +25,4 @@ Route::get('/registro/huesped', [RegistroHuespedController::class,'index'])->nam
 Route::post('/registro/huesped', [RegistroHuespedController::class,'envio'])->name('registro.huesped.envio');
 Route::resource('/listaHabitacion', listarHabitacionesController::class);
 Route::get('/disponibilidad',[DisponibilidadController::class,'index'])->name('disponibilidad');
+Route::get('/disponibilidad/consulta',[DisponibilidadController::class,'query'])->name('disponibilidad.consulta');

@@ -1,4 +1,25 @@
+/* cards disponibilidad*/
+.card {
+  /* Estilos de la tarjeta */
+  /* ... */
+  transition: transform 0.3s; /* Transición de animación */
+}
 
+.card:hover {
+  /* Estilos al hacer hover */
+  transform: scale(1.05); /* Cambio de escala al hacer hover */
+  /* Agrega otros estilos o animaciones según tus necesidades */
+}
+
+@keyframes custom-animation {
+  /* Reglas de animación personalizadas */
+  /* ... */
+}
+
+.card-animation {
+  /* Aplica la animación personalizada */
+  animation: custom-animation 1s infinite;
+}
 /* Tipo */
 .check-element {
   height: 360px; /* Establece una altura máxima para el contenedor */

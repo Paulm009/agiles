@@ -12,8 +12,12 @@
     <h3>Tipos de Habitacion</h3>
     <div class="check-element row overflow-auto">
         @foreach($tipos as $tipo)
+        @php
+        $number = $tipo->idTipo % 10 + 1;
+        $class = "checkbox-{$number} custom-control custom-checkbox border border-secondary-subtle";
+    @endphp
         <div class="col-6">
-            <div class="checkbox-1 custom-control custom-checkbox border border-secondary-subtle">
+            <div class="{{ $class }}">
                 <input type="checkbox" class="custom-control-input" id="checkbox{{$tipo->idTipo}}" name="tipo[]" value="{{$tipo->idTipo}}">
                 <label class="custom-control-label" for="checkbox{{$tipo->idTipo}}">{{$tipo->tipo}}</label>
             </div>
@@ -22,20 +26,4 @@
         
         
     </div>
-    <ul class="">
-        {{-- <li>
-            <input type="checkbox" name="tipo" value="ch1" id="ch1">
-            <label for="ch1">Individual</label>
-        </li>
-        <li>
-            <input type="checkbox" name="tipo" value="ch1" id="ch1">
-            <label for="ch1">Doble</label>
-        </li> --}}
-        {{-- @foreach($tipos as $tipo)
-        <li>
-            <input type="checkbox" name="tipo" value="{{$tipo->id}}" id="{{$tipo->id}}">
-            <label for="{{$tipo->id}}">{{$tipo->nombre}}</label>
-        </li>
-        @endforeach --}}
-    </ul>
 </div>
