@@ -25,6 +25,8 @@
                             <div class="col-md-7">
                                 <div class="card-body text-center">
                                     <h5 class="card-title">{{$habitaciones->nombreHabitacion}}</h5>
+
+                                    <p class="card-text small">{{$habitaciones->descripcion}}</p>
                                     
                                     <p class="card-text"><small class="text-body-secondary">Tipo de habitación: {{$habitaciones->tipoHabitacion->tipo}}</small></p>
 
