@@ -1,14 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;800&display=swap');
+
 
 .navbar-brand.logo {
-    font-family: 'Nunito', sans-serif !important;
-    font-size: 50px !important;
-    font-weight: bold !important;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
 }
 .navbar a {
-    font-family: 'Nunito', sans-serif !important;
-    font-size: 20px !important;
+    font-family: 'Inter', sans-serif; 
+    font-size: 13px;
 }
 .navbar li {
-    text-align: center;
+    font-size: 10px;
+}
+
+.navbar-nav li:hover .nav-link {
+    color: black;
+    background-color: rgba(251, 186, 49, 1);
+    transition: all .5s;
+    border-radius: 10px;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    color: black;
+    background-color: rgba(251, 186, 49, 1);
+    transition: all .5s;
+    border-radius: 10px;
+}
+
+.navbar-nav li:hover .nav-link {
+    color: black;
+    background-color: rgba(251, 186, 49, 1);
+    transition: all .5s;
+    border-radius: 10px;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    color: black;
+    background-color: rgba(251, 186, 49, 1);
+    transition: all .5s;
+    border-radius: 10px;
+}
+
+.dropdown-menu-dark.inside {
+    display: none;
 }
