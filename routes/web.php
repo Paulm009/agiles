@@ -24,3 +24,4 @@ Route::post('/reserva/habitacionesDisponibles', [ReservaHabitacionController::cl
 Route::get('/registro/huesped', [RegistroHuespedController::class,'index'])->name('registro.huesped');
 Route::post('/registro/huesped', [RegistroHuespedController::class,'envio'])->name('registro.huesped.envio');
 Route::get('/listaHabitacion', [listarHabitacionesController::class,'index'])->name('habitaciones');
+Route::get('/reserva/habitacionesDisponibles/r', [HabitacionesDisponibles::class,'index'])->name('habitacionesDisponibles.index');

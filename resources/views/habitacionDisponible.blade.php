@@ -33,19 +33,19 @@
             </form>
 
             <div class="row mt-4">
-                @foreach($habitacion as $habitaciones)
-                <div class="col-md-4">
-                    <div class="card mb-3">
+                @foreach($habitacionesDisponibles as $habitaciones)
+                <div class="col-md-6">
+                    <div class="card mb-3 ">
                         <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="{{ asset('redi.jpg') }}" class="img-fluid rounded-start w-100" alt="...">
+                            <div class="col-md-5">
+                                <img src="{{ asset('habimoder.jpg') }}" class="img-fluid rounded-start w-100" alt="...">
                             </div>
-                            
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{$habitaciones->nombreHabitacion}}</h5>
 
-                                    <p class="card-text ">{{$habitaciones->descripcion}}</p>
+                            <div class="col-md-7">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">{{$habitaciones->nombreHabitacion}}</h5>
+                                    
+                                    <p class="card-text"><small class="text-body-secondary">Tipo de habitación: {{$habitaciones->tipoHabitacion->tipo}}</small></p>
 
                                     <p class="text-center card-text"><small class="text-body-secondary">Precio: {{$habitaciones->precio}}</small></p>
 
@@ -60,10 +60,4 @@
         </div>
     @endsection
 </html>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    @endsection
-</html>
+           
