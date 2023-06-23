@@ -19,7 +19,7 @@
         <div class="col-6">
             <div class="{{ $class }}">
                 <input type="checkbox" class="custom-control-input" id="checkbox{{$tipo->idTipo}}" name="tipo[]" value="{{$tipo->idTipo}}">
-                <label class="custom-control-label" for="checkbox{{$tipo->idTipo}}">{{$tipo->tipo}}</label>
+                <label class="custom-control-label" for="checkbox{{$tipo->idTipo}}">{{$tipo->tipoHabitacion}}</label>
             </div>
         </div>
         @endforeach

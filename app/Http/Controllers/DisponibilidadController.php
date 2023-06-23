@@ -18,6 +18,18 @@ class DisponibilidadController extends Controller
     public function query(Request $request){
         
         // return $request;
+        $request->validate([
+            'fechaInicio' => [
+                'required',
+                'date',
+                'after_or_equal:'.(now()->format('Y-m-d')), // Verifica que la fecha sea igual o posterior a la fecha actual
+            ],
+            'fechaFin' => [
+                'required',
+                'date',
+                'after:'.(request()->input('fechaInicio')), // Verifica que la fecha sea igual o posterior a la fecha actual
+            ],
+        ]);
         $tipos = Tipo::all();
         if(request()->input('tipo') == 0){
             $tiposHabiTotal = Habitacion::where('estado',true)->groupBy('idTipo')->select('idTipo', DB::raw('COUNT(*) as cantidad'))

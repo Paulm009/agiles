@@ -31,7 +31,7 @@
         <div class=" list-group-item card card-animation my-3 mx-2 shadow" >
           <div class="row g-0">
             <div class="col-md-5 d-flex align-items-center">
-              <img src="{{URL::asset('img/bed.png' )}}" class="img-fluid rounded-start" alt="simple">
+              <img src="{{URL::asset('img/bed.jpg' )}}" class="img-fluid rounded-start" alt="simple">
             </div>
             <div class="col-md-7">
               <div class="card-body">
