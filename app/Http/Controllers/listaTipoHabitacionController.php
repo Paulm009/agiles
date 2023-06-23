@@ -15,7 +15,7 @@ class listaTipoHabitacionController extends Controller
     public function index()
     {
         $habitacion = Habitacion::with('tipohabitacion')->paginate(5);
-        $tipos = Tipo::paginate(5);
+        $tipos = Tipo::paginate(10);
         return view('listaTipoHabitacion')->with('tiposH', $tipos);
     }
 
