@@ -34,19 +34,6 @@
                         <p class="text-warning">{{ $message }}</p>
                     @enderror
                 </div>
-                
-                <div class="col-md-6 mt-3">
-                  <label for="cantidadDeHuespedes" class="form-label text-light">Tipo de habitación:</label>
-                  <select name="tipoHabitacion" id="tipoHabitacion" class="form-control">
-                      <option value="">Todos</option>
-
-                      <option value="Simple">Simple</option>
-
-                      <option value="Doble">Doble</option>
-
-                      <option value="Triple">Triple</option>
-                  </select>
-                </div>
               </div>
 
               <div class="row d-flex justify-content-center mx-1">

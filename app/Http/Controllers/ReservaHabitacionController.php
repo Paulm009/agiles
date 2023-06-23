@@ -19,12 +19,12 @@ class ReservaHabitacionController extends Controller
     {
         Pluralizer::useLanguage('spanish');
         $request->validate([
-            'fechaIngreso' => 'required',
-            'fechaSalida' => 'required',
+            'fechaIngreso' => ['required', 'date', 'after_or_equal:today'],
+            'fechaSalida' => ['required', 'date', 'after_or_equal:fechaIngreso'],
         ]);
         
         $tipoHabitacion = $request->input('tipoHabitacion');
-        
+        // return $request;
         
         $habitacionesDisponibles = Habitacion::whereNotIn('idHabitacion', function ($query) {
             $query->select('idHabitacion')
