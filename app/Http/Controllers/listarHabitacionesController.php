@@ -6,22 +6,34 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Habitacion;
 use App\Models\Tipo;
-
+use Carbon\Carbon;
+use Illuminate\Support\Str;
+use Barryvdh\DomPDF\PDF;
 class listarHabitacionesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $habitacion = Habitacion::with('tipo')->paginate(5);
-        return view ('habitaciones.listaHabitacion')->with('habitacion', $habitacion);
+        $search ="";
+        if (isset($request->buscar)) {
+            $nombre = $request->get('buscar');
+            $search =$nombre;
+            $habitacion = Habitacion::with('tipo')->where('nombreHabitacion','like',"%$nombre%")->paginate(5);
+        }else{
+            $habitacion = Habitacion::with('tipo')->paginate(5);
+        }
+        return view('habitaciones.listaHabitacion',compact('habitacion','search'));
         //return view('formularioReserva',compact('habitacion'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
+
+
+
     public function create()
     {
         $tipos= Tipo::all();
@@ -37,17 +49,35 @@ class listarHabitacionesController extends Controller
             'idTipo' => 'required',
             'nombreHabitacion' => 'required|min:10|string',
             'precio' => 'required|numeric|min:1',
-            'capacidad' => 'required|numeric|min:1',
-            'precioDescuento' => 'required|numeric|min:1',
-            'descripcion' => 'required|string|min:4'
+            'estado' => 'required|string|min:4',
+            'descripcion' => 'required|string|min:4',
+            'imagen'=>'required'
         ], [
-            'idTipo.required' => 'idTipo field is required.',
-            'nombreHabitacion.required' => 'nombreHabitacion field is required.',
-            'precio.required' => 'precio field is required.',
-            'capacidad.required' => 'capacidad field is required.',
-            'precioDescuento.required' => 'precioDescuento field is required.',
-            'descripcion.required' => 'descripcion field is required.',
+            'idTipo.required' => 'Tipo es requerido.',
+            'nombreHabitacion.required' => 'Nombre Habitacion es requerido.',
+            'precio.required' => 'Precio es requerido.',
+            'estado' => 'Estado es requerido.',
+            'descripcion.required' => 'Descripcion es requerido.',
+            'imagen.required'=>'Es requerido la imagen'
         ]);
+        if (isset($_FILES['imagen'])) {
+            $imagen = $_FILES['imagen'];
+            
+            if ($imagen['error'] === UPLOAD_ERR_OK) {
+                $nombreimagen = "habitacion_" . time() . '_' . basename($imagen['name']);
+                $ruta = "img/habitacion/" . $nombreimagen;
+                
+                if (move_uploaded_file($imagen['tmp_name'], $ruta)) {
+                    $validatedData["imagen"] = $ruta;
+                } else {
+                    $validatedData["imagen"] = '';
+                }
+            } else {
+                $validatedData["imagen"] = '';
+            }
+        } else {
+            $validatedData["imagen"] = '';
+        }
         $habitacion = Habitacion::create($validatedData);          
         return redirect('listaHabitacion')->with('success', 'Habitacion creada exitosamente.');
     }
@@ -79,18 +109,38 @@ class listarHabitacionesController extends Controller
             'idTipo' => 'required',
             'nombreHabitacion' => 'required|min:10|string',
             'precio' => 'required|numeric|min:1',
-            'capacidad' => 'required|numeric|min:1',
-            'precioDescuento' => 'required|numeric|min:1',
-            'descripcion' => 'required|string|min:4'
+            'estado' => 'required|string|min:4',
+            'descripcion' => 'required|string|min:4',
+            'imagen'=>'required'
         ], [
             'idTipo.required' => 'idTipo field is required.',
             'nombreHabitacion.required' => 'nombreHabitacion field is required.',
             'precio.required' => 'precio field is required.',
-            'capacidad.required' => 'capacidad field is required.',
-            'precioDescuento.required' => 'precioDescuento field is required.',
+            'estado.required'=> 'estado field is required.',
             'descripcion.required' => 'descripcion field is required.',
+            'imagen.required'=>'Es requerido la imagen'
         ]);
         $habitacion = Habitacion::find($id);
+        if (isset($_FILES['imagen'])) {
+            $imagen = $_FILES['imagen'];
+            dd($imagen);
+            if ($imagen['error'] === UPLOAD_ERR_OK) {
+                $nombreimagen = "habitacion_" . time() . '_' . basename($imagen['name']);
+                $ruta = "img/habitacion/" . $nombreimagen;
+                
+                if (move_uploaded_file($imagen['tmp_name'], $ruta)) {
+                    $validatedData["imagen"] = $ruta;
+                } else {
+                    $validatedData["imagen"] = $habitacion->imagen ?$habitacion->imagen:'';
+                }
+            } else {
+                $validatedData["imagen"] = $habitacion->imagen ?$habitacion->imagen:'';
+            }
+        } else {
+            $validatedData["imagen"] = $habitacion->imagen ?$habitacion->imagen:'';
+        }
+
+       
         $habitacion->update($validatedData);       
         return redirect('listaHabitacion')->with('success', 'Habitacion editada exitosamente.');
     }
@@ -107,5 +157,17 @@ class listarHabitacionesController extends Controller
         }else{
             return back()->withInput()->with('error',  'Habitacion delete failed.');
         }
+    }
+    public function imprimir(Request $request){
+        $habitacion=null;
+        if (isset($request->buscar)) {
+            $nombre = $request->get('buscar_pri');
+            $habitacion = Habitacion::with('tipo')->where('nombreHabitacion','like',"%$nombre%")->paginate(5);
+        }else{
+            $habitacion = Habitacion::with('tipo')->paginate(5);
+        }
+        $today = Carbon::now()->format('d/m/Y');
+        $pdf = \PDF::loadView('habitaciones.imprimir', compact('today','habitacion'));
+        return $pdf->download('habitaciones.pdf');
     }
 }

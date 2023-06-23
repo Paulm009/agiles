@@ -3,7 +3,6 @@
 <header class="header">
   <title>Lista De Habitaciones</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 <style>
   img, svg{
     width: 22px !important;
@@ -26,7 +25,7 @@
     <div class="col-md-12 mb-2">
       <br>
       <a href="{{url('listaHabitacion/create')}}">
-        <button id="BotonAgregarHabitacion" type="button" class="btn btn-sm btn-success"><span class="bi bi-plus-circle"></span>&nbsp;Nueva Habitacion</button>
+        <button id="BotonAgregarHabitacion" type="button" class="btn btn-sm btn-success">Nueva Habitacion</button>
       </a>
     </div>
     <br>
@@ -48,33 +47,47 @@
       </div>
       @endif
       <div class="table-responsive">
+      
+        <form class="form-inline" method="get" style="display: inline;" action="{{url('imprimir')}}">
+           @csrf
+           <input name="buscar_pri" class="form-control mr-sm-2" value="{{$search}}" style="display: none;" type="hidden">
+           <button class="btn btn-outline-primary my-2 my-sm-0" style="display: inline;" type="submit">Imprimir</button>
+        </form>
+         <form class="form-inline" style="display: inline;float:right;">
+         @csrf
+           <input name="buscar" class="form-control mr-sm-2" value="{{$search}}" style="display: inline; max-width:250px;margin:auto;" type="search" placeholder="Buscar por nombre" aria-label="Search">
+           
+           <button class="btn btn-outline-success my-2 my-sm-0" style="display: inline;" type="submit">Buscar</button>
+        </form>
         <table class="table table-hover" style="width:100%">
           <thead class="text-center">
             <tr id="first_column">
               <th scope="col">Nro</th>
               <th scope="col">Nombre</th>
               <th scope="col">Tipo</th>
-              <th scope="col">Capacidad</th>
+              <th scope="col">Estado</th>
               <th scope="col">Precio</th>
               <th scope="col">Acciones</th>
             </tr>
           </thead>
           <tbody>
+            
             @foreach($habitacion as $item)
             <tr class="text-center">
               <td>{{$loop->iteration }}</td>
               <td>{{$item->nombreHabitacion }}</td>
               <td><span class="badge badge-secondary" style="color:black;background: #aaa;">{{$item->tipo->tipoHabitacion }}</span></td>
-              <td>{{$item->capacidad }}</td>
+              <td>{{$item->estado }}</td>
               <td>{{$item->precio }}</td>
+              {{-- <td>@if($item->imagen)<img width="40" height="40" src="{{$item->imagen?$item->imagen:''}}"/>@endif</td> --}}
               <td>
                 <a href="{{url('listaHabitacion/'.$item->idHabitacion.'/edit')}}" style="text-decoration: none;">
-                  <button type="button" class="btn btn-warning text-light btn-sm"><span class="bi bi-pencil"></span>&nbsp;Editar</button>
+                  <button type="button" class="btn btn-warning text-light btn-sm">Editar</button>
                 </a>
                 <form method="post" action="{{url('listaHabitacion/'.$item->idHabitacion)}}" onsubmit="return confirm('Está seguro que desea eliminar la habitación?')" style="display: inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger  btn-sm bi"><span class="bi bi-trash"></span>&nbsp;Eliminar</button>
+                    <button type="submit" class="btn btn-danger  btn-sm bi">Eliminar</button>
                 </form>
               </td>
             </tr>
@@ -85,11 +98,6 @@
     </div>
       <div class="pagination">
       {{ $habitacion->appends(['sort' => 'idHabitacion'])->render() }}
-      </div>
-    </div>
-    <div class="col-md-12 mb-2">
-      <div style="text-align:right">
-        <a type="button" href="{{route('home')}}" class="btn btn-danger text-center btnSalir">Salir</a>
       </div>
     </div>
   </div>
