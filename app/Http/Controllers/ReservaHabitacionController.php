@@ -21,7 +21,7 @@ class ReservaHabitacionController extends Controller
     {
         Pluralizer::useLanguage('spanish');
         $request->validate([
-            'fechaIngreso' => 'required',
+            'fechaIngreso' => 'required|after_or_equal:today',
             'fechaSalida' => 'required|after_or_equal:fechaIngreso',
         ]);
         

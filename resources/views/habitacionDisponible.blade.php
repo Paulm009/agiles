@@ -19,7 +19,7 @@
                     <div class="card mb-3 ">
                         <div class="row g-0">
                             <div class="col-md-5">
-                                <img src="{{ asset('tres.jpg') }}" class="img-fluid rounded-start w-100" alt="...">
+                                <img src="{{ asset('habimoder.jpg') }}" class="img-fluid rounded-start w-100" alt="...">
                             </div>
 
                             <div class="col-md-7">
