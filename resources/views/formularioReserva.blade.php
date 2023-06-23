@@ -41,7 +41,7 @@
                       <option value="">Todos</option>
 
                       @foreach ($tiposHabitacion as $tipo)
-                          <option value="{{ $tipo->idTipo }}">{{ $tipo->tipoHabitacion }}</option>
+                          <option value="{{ $tipo->idTipo }}">{{ $tipo->tipo}}</option>
                       @endforeach
 
                   </select>

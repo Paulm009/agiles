@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Habitacion;
 use App\Models\Tipo;
+
 class listaTipoHabitacionController extends Controller
 {
     /**
@@ -14,8 +15,8 @@ class listaTipoHabitacionController extends Controller
     public function index()
     {
         $habitacion = Habitacion::with('tipohabitacion')->paginate(5);
-        $tipos = Tipo::paginate(5);
-        return view ('listaTipoHabitacion')->with('tiposH', $tipos);
+        $tipos = Tipo::paginate(10);
+        return view('listaTipoHabitacion')->with('tiposH', $tipos);
     }
 
     /**
@@ -24,7 +25,7 @@ class listaTipoHabitacionController extends Controller
     public function save()
     {
         return request();
-        return view('habitaciones.create',compact('tipos'));
+        return view('habitaciones.create', compact('tipos'));
     }
 
     /**
@@ -32,14 +33,25 @@ class listaTipoHabitacionController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->idTipo){
+        // Validar que no se repita el tipo
+        $tipoExistente = Tipo::where('tipoHabitacion', $request->tipoHabitacion)->first();
+        if ($tipoExistente) {
+            return response()->json(['error' => 'El tipo de habitación ya existe.'], 422);
+        }
+
+        // Validar la capacidad
+        if ($request->capacidad > 10) {
+            return response()->json(['error' => 'La capacidad no puede ser mayor que 10.'], 422);
+        }
+
+        if ($request->idTipo) {
             $tipo = Tipo::find($request->idTipo);
             $tipo->update($request->all());
-        }else{
+        } else {
             $tipo = Tipo::create($request->all());
         }
-        
-        return response()->json(['idTipo'=>$tipo->idTipo]);
+
+        return response()->json(['idTipo' => $tipo->idTipo]);
     }
 
     /**
@@ -55,9 +67,9 @@ class listaTipoHabitacionController extends Controller
      */
     public function edit(string $id)
     {
-        $tipos= Tipo::all();
+        $tipos = Tipo::all();
         $habitacion = Habitacion::find($id);
-        return view('habitaciones.edit',compact('habitacion','tipos'));
+        return view('habitaciones.edit', compact('habitacion', 'tipos'));
     }
 
     /**
@@ -74,8 +86,8 @@ class listaTipoHabitacionController extends Controller
      */
     public function destroy(Request $request)
     {
-        $tipo = Tipo::find($request ->idTipo);
+        $tipo = Tipo::find($request->idTipo);
         $tipo->delete();
-        return response()->json(['success'=>"deleted successfully"]);
+        return response()->json(['success' => "deleted successfully"]);
     }
 }

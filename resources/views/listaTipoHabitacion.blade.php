@@ -10,8 +10,6 @@
     }
   </style>
 </head>
-
-
 @extends('layout')
 @section('content')
 
@@ -23,7 +21,7 @@
         <input type="text" id="searchInput" class="form-control" placeholder="Buscar...">
       </div>
       <div class="col-md-6 text-right">
-        <button id="addRowBtn" class="btn btn-primary">Agregar Tipo</button>
+        <button id="addRowBtn" class="btn btn-warning btn-primary">Agregar Tipo</button>
       </div>
     </div>
     <table id="dataTable" class="table table-striped">
@@ -42,10 +40,12 @@
           <td>{{$tipo->capacidad}}</td>
           <td id="{{$tipo->idTipo}}" class="d-none"></td>
           <td class="table-actions">
-            <button class="btn btn-sm btn-primary editBtn">Editar</button>
+            <button class="btn btn-sm btn-warning editBtn">Editar</button>
             <button class="btn btn-sm btn-danger deleteBtn">Eliminar</button>
             <button class="btn btn-sm btn-success saveBtn d-none">Guardar</button>
             <button class="btn btn-sm btn-secondary cancelBtn d-none">Cancelar</button>
+            <br>
+            <p class="text-danger d-none error-message">Nombre repetido</p>
           </td>
         </tr>
         @endforeach
@@ -85,55 +85,68 @@
         row.find('.cancelBtn').removeClass('d-none');
       });
 
-      // Guardar edición de fila
-      $(document).on('click', '.saveBtn', function() {
-        var row = $(this).closest('tr');
-        var type = row.find('input:eq(0)').val();
-        var capacity = row.find('input:eq(1)').val();
-        var idTipo = 0;
-        $.ajax({
-            url: "{{route('tipo.guardar')}}",
-            type: 'POST',
-            headers: headers,
-            data: {
-                tipoHabitacion: type,
-                capacidad: capacity,
-                idTipo: row.find('td:eq(2)').attr('id')
-            },
-            dataType: 'json',
-            success: function(response) {
-                
-              console.log(response.idTipo);
-              idTipo = response.idTipo;
-              row.find('td:eq(0)').text(type);
-              row.find('td:eq(1)').text(capacity);
-              row.find('td:eq(2)').attr('id', idTipo);
-              row.find('td:eq(2)').addClass('d-none');
-              row.find('.editBtn').removeClass('d-none');
-              row.find('.deleteBtn').removeClass('d-none');
-              row.find('.saveBtn').addClass('d-none');
-              row.find('.cancelBtn').addClass('d-none');
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
-            }
-        });
-        
-      });
+   // Guardar edición de fila
+$(document).on('click', '.saveBtn', function() {
+  var row = $(this).closest('tr');
+  var type = row.find('input:eq(0)').val();
+  var capacity = row.find('input:eq(1)').val();
+  var idTipo = 0;
+  
+  $.ajax({
+    url: "{{route('tipo.guardar')}}",
+    type: 'POST',
+    headers: headers,
+    data: {
+      tipoHabitacion: type,
+      capacidad: capacity,
+      idTipo: row.find('td:eq(2)').attr('id')
+    },
+    dataType: 'json',
+    success: function(response) {
+      console.log(response.idTipo);
+      idTipo = response.idTipo;
+      
+      // Restaurar el estado de la fila y eliminar el mensaje de error si existe
+      row.find('.error-message').remove();
+      row.removeClass('error-row');
+      
+      row.find('td:eq(0)').text(type);
+      row.find('td:eq(1)').text(capacity);
+      row.find('td:eq(2)').attr('id', idTipo);
+      row.find('td:eq(2)').addClass('d-none');
+      row.find('.editBtn').removeClass('d-none');
+      row.find('.deleteBtn').removeClass('d-none');
+      row.find('.saveBtn').addClass('d-none');
+      row.find('.cancelBtn').addClass('d-none');
+    },
+    error: function(xhr, status, error) {
+      console.log(error);
+      
+      // Mostrar mensaje de error debajo del campo de capacidad
+      var errorMessage = '<span class="error-message text-danger">Nombre repetido o capacidad máxima alcanzada</span>';
+      row.find('input:eq(1)').after(errorMessage);
+      row.addClass('error-row');
+    }
+  });
+});
 
-      // Cancelar edición de fila
-      $(document).on('click', '.cancelBtn', function() {
-        var row = $(this).closest('tr');
-        var type = row.find('input:eq(0)').val();
-        var capacity = row.find('input:eq(1)').val();
+// Cancelar edición de fila
+$(document).on('click', '.cancelBtn', function() {
+  var row = $(this).closest('tr');
+  
+  // Eliminar la fila solo si tiene la clase 'error-row'
+  if (row.hasClass('error-row')) {
+    row.remove();
+  } else {
+    // Restaurar el estado de los botones y campos en caso de que se hayan modificado
+    row.find('.editBtn').removeClass('d-none');
+    row.find('.deleteBtn').removeClass('d-none');
+    row.find('.saveBtn').addClass('d-none');
+    row.find('.cancelBtn').addClass('d-none');
+    row.find('.error-message').remove(); // Eliminar mensaje de error
+  }
+});
 
-        row.find('td:eq(0)').text(type);
-        row.find('td:eq(1)').text(capacity);
-        row.find('.editBtn').removeClass('d-none');
-        row.find('.deleteBtn').removeClass('d-none');
-        row.find('.saveBtn').addClass('d-none');
-        row.find('.cancelBtn').addClass('d-none');
-      });
 
       // Eliminar fila
       $(document).on('click', '.deleteBtn', function() {
@@ -177,13 +190,14 @@
         var newRow = '<tr class="text-center">' +
           '<td><input name="nombeTipo" type="text" class="form-control"></td>' +
           '<td><input name="capacidad" type="text" class="form-control"></td>' +
-          '<td class="d-none"><input name="capacidad" type="text" class="form-control"></td>' +
+          '<td class="d-none"></td>' +
           '<td class="table-actions">' +
           '<button class="btn btn-sm btn-primary editBtn d-none">Editar</button>' +
           '<button class="btn btn-sm btn-danger deleteBtn d-none">Eliminar</button>' +
           '<button class="btn btn-sm btn-success saveBtn ">Guardar</button>' +
           '<button class="btn btn-sm btn-secondary cancelBtn ">Cancelar</button>' +
           '</td>' +
+          '<td class="error-message text-danger" colspan="3"></td>' + // Mensaje de error
           '</tr>';
             
         $('#dataTable tbody').append(newRow);
@@ -202,3 +216,5 @@
 </body>
 </html>
 @endsection
+
+
