@@ -13,7 +13,7 @@ class listaTipoHabitacionController extends Controller
      */
     public function index()
     {
-        $habitacion = Habitacion::with('tipo')->paginate(5);
+        $habitacion = Habitacion::with('tipohabitacion')->paginate(5);
         $tipos = Tipo::paginate(5);
         return view ('listaTipoHabitacion')->with('tiposH', $tipos);
     }
@@ -79,4 +79,3 @@ class listaTipoHabitacionController extends Controller
         return response()->json(['success'=>"deleted successfully"]);
     }
 }
-
