@@ -32,7 +32,7 @@
                                     
                                     <p class="text-center card-text"><small class="text-body-secondary">Tipo de habitación: {{$habitaciones->tipoHabitacion->tipo}}</small></p>
 
-                                    <a type="button" href="" class="btn w-100 btn-warning mt-2">Reservar</a>
+                                    <a type="button" href="#" class="btn w-100 btn-warning mt-2">Reservar</a>
                                 </div>
                             </div>
                         </div>

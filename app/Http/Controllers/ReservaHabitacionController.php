@@ -6,6 +6,8 @@ use App\Models\Tipo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Pluralizer;
+use Illuminate\Support\Facades\Validator;
+
 
 class ReservaHabitacionController extends Controller
 {
@@ -20,7 +22,7 @@ class ReservaHabitacionController extends Controller
         Pluralizer::useLanguage('spanish');
         $request->validate([
             'fechaIngreso' => 'required',
-            'fechaSalida' => 'required',
+            'fechaSalida' => 'required|after_or_equal:fechaIngreso',
         ]);
         
         $tipoHabitacion = $request->input('tipoHabitacion');
